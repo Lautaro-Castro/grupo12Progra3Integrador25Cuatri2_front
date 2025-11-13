@@ -1,0 +1,80 @@
+:root {
+    --color-principal: #b51616;
+    --color-secundario: #fcf0e8;
+    --color-detalles: #dea509;
+    --color-background: #212121;
+}
+
+html{
+    background-color: var(--color-background);
+}
+/*===================
+       header
+===================*/
+nav {
+    display: flex;
+    /*max-width: 800px;*/
+    background-color: var(--color-principal);
+    border-radius: 0.4rem;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+nav ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding-left: 0;
+    list-style-type: none;
+}
+
+nav ul li a {
+    color: var(--color-secundario);        
+    text-decoration: none;
+    font-weight: bold;   
+}
+
+nav ul li a:hover {
+    color: var(--color-detalles);
+    text-shadow: 2px 2px 5px black;
+    font-size: 18px;
+}
+
+/*===============
+    main
+================*/
+h1 {
+    color: var(--color-secundario);
+}
+
+hr {
+    border: none;
+    height: 2px;
+    /*background-color: var(--color-detalles);*/
+    background-color: darkgray;
+}
+
+#contenedor-cartelera {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    color: var(--color-secundario);
+}
+
+.card-pelicula {
+    width: 350px;
+    border: 2px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 450px;
+    margin: 2px;
+    text-align: center;
+}
+
+.pelicula-img {
+    width: 80%;
+    height: 80%;
+}
+
+

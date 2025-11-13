@@ -1,0 +1,43 @@
+//Se traen los elementos del html
+let contenedorCartelera = document.getElementById("contenedor-cartelera");
+let contenedorEstrenos = document.getElementById("contenedor-estrenos");
+//Se crea la url para consumir la api
+let url = "http://localhost:3000";
+
+//Funcion para poder consumir la api y traer las peliculas en cartelera y proximos estrenos
+async function obtenerPeliculasCartelera() {
+    try {
+        let response = await fetch(`${url}/peliculas`);
+        console.log(response);
+        console.log(`Solicitud fetch `)
+
+        let data = await response.json();
+        console.log(data);
+        
+        let peliculasCartelera = data.payload;
+        console.log(peliculasCartelera);
+
+        
+        mostrarPeliculasCartelera(peliculasCartelera);
+
+    } catch (error) {
+        console.error("Error obteniendo peliculas: ", error);
+    }
+}
+
+//Funcion para poder mostrar en pantalla las peliculas que trajimos de la BD
+function mostrarPeliculasCartelera(array){
+    let htmlEnCartelera = "";
+    array.forEach(peli => {
+        htmlEnCartelera += `
+                 <div class="card-pelicula">
+                    <img class="pelicula-img" src="${peli.poster_url}" alt="${peli.nombre}">
+                    <h3>${peli.nombre}</h3>
+                </div>
+        `;
+    });
+
+    contenedorCartelera.innerHTML = htmlEnCartelera;
+}
+
+obtenerPeliculasCartelera();
