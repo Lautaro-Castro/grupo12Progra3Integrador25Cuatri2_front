@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <input type="text" name="Ingrese su nombre:" id="campoNombre">
+    <button id="botonIngresar">Ingresar</button>
+
+    <script>
+
+        let botonIngresar = document.getElementById("botonIngresar");
+        let campoNombre = document.getElementById("campoNombre");
+
+        botonIngresar.addEventListener("click", () => {
+            if(!campoNombre){
+                alert("Ingrese su nombre por favor!");
+            }else{
+                window.location.href = "peliculas.html";
+            }
+        });
+
+    </script>
+</body>
+</html>
