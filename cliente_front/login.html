@@ -15,9 +15,12 @@
         let campoNombre = document.getElementById("campoNombre");
 
         botonIngresar.addEventListener("click", () => {
-            if(!campoNombre){
+            if(!campoNombre.value){
                 alert("Ingrese su nombre por favor!");
             }else{
+                // Guardamos el nombre en localStorage
+                localStorage.setItem("nombreUsuario", campoNombre.value.trim());
+                //Redirigimos a la pagina de peliculas
                 window.location.href = "peliculas.html";
             }
         });
