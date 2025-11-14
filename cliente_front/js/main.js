@@ -1,6 +1,6 @@
 //Se traen los elementos del html
 let contenedorCartelera = document.getElementById("contenedor-cartelera");
-let contenedorEstrenos = document.getElementById("contenedor-estrenos");
+let contenedorAEstrenar = document.getElementById("contenedor-a-estrenar");
 //Se crea la url para consumir la api
 let url = "http://localhost:3000";
 
@@ -40,4 +40,40 @@ function mostrarPeliculasCartelera(array){
     contenedorCartelera.innerHTML = htmlEnCartelera;
 }
 
+async function obtenerPeliculasAEstrenar() {
+    try {
+        let response = await fetch(`${url}/peliculasAEstrenar`);
+        console.log(response);
+        console.log(`Solicitud fetch `)
+
+        let data = await response.json();
+        console.log(data);
+        
+        let peliculasAEstrenar = data.payload;
+        console.log(peliculasAEstrenar);
+
+        
+        mostrarPeliculasAEstrenar(peliculasAEstrenar);
+
+    } catch (error) {
+        console.error("Error obteniendo peliculas: ", error);
+    }
+}
+
+//Funcion para poder mostrar en pantalla las peliculas que trajimos de la BD
+function mostrarPeliculasAEstrenar(array){
+    let htmlAEstrenar = "";
+    array.forEach(peli => {
+        htmlAEstrenar += `
+                 <div class="card-pelicula">
+                    <img class="pelicula-img" src="${peli.poster_url}" alt="${peli.nombre}">
+                    <h3>${peli.nombre}</h3>
+                </div>
+        `;
+    });
+
+    contenedorAEstrenar.innerHTML = htmlAEstrenar;
+}
+
 obtenerPeliculasCartelera();
+obtenerPeliculasAEstrenar();
