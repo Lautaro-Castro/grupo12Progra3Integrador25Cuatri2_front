@@ -1,79 +1,44 @@
-//Se traen los elementos del html
-let contenedorCartelera = document.getElementById("contenedor-cartelera");
-let contenedorAEstrenar = document.getElementById("contenedor-a-estrenar");
+//Se obtiene el contendor html donde iran los productos
+let contendorProductos = document.getElementById("contenedor-productos");
+
 //Se crea la url para consumir la api
 let url = "http://localhost:3000";
 
-//Funcion para poder consumir la api y traer las peliculas en cartelera y proximos estrenos
-async function obtenerPeliculasCartelera() {
+//Funcion para poder consumir la api y traer los productos
+async function obtenerProductos() {
     try {
-        let response = await fetch(`${url}/peliculas`);
+        let response = await fetch(`${url}/productos`);
         console.log(response);
         console.log(`Solicitud fetch `)
-
+    
         let data = await response.json();
         console.log(data);
         
-        let peliculasCartelera = data.payload;
-        console.log(peliculasCartelera);
-
+        let productos = data.payload;
+        console.log(productos);
         
-        mostrarPeliculasCartelera(peliculasCartelera);
-
+        mostrarProductos(productos);
+    
     } catch (error) {
-        console.error("Error obteniendo peliculas: ", error);
+        console.error("Error obteniendo productos: ", error);
     }
 }
 
-//Funcion para poder mostrar en pantalla las peliculas que trajimos de la BD
-function mostrarPeliculasCartelera(array){
-    let htmlEnCartelera = "";
-    array.forEach(peli => {
-        htmlEnCartelera += `
-                 <div class="card-pelicula">
-                    <img class="pelicula-img" src="${peli.poster_url}" alt="${peli.nombre}">
-                    <h3>${peli.nombre}</h3>
+//Funcion para poder mostrar en pantalla los productos que trajimos de la BD
+function mostrarProductos(array){
+    let htmlProductos = "";
+    array.forEach(prod => {
+        htmlProductos += `
+                    <div class="card-producto">
+                    <img class="producto-img" src="${prod.imagen_url}" alt="${prod.nombre}">
+                    <h2>${prod.nombre}</h2>
+                    <p>${prod.descripcion}
+                    <br><strong>$${prod.precio}</strong></p>
                 </div>
         `;
     });
 
-    contenedorCartelera.innerHTML = htmlEnCartelera;
+    contendorProductos.innerHTML = htmlProductos;
 }
 
-async function obtenerPeliculasAEstrenar() {
-    try {
-        let response = await fetch(`${url}/peliculasAEstrenar`);
-        console.log(response);
-        console.log(`Solicitud fetch `)
-
-        let data = await response.json();
-        console.log(data);
-        
-        let peliculasAEstrenar = data.payload;
-        console.log(peliculasAEstrenar);
-
-        
-        mostrarPeliculasAEstrenar(peliculasAEstrenar);
-
-    } catch (error) {
-        console.error("Error obteniendo peliculas: ", error);
-    }
-}
-
-//Funcion para poder mostrar en pantalla las peliculas que trajimos de la BD
-function mostrarPeliculasAEstrenar(array){
-    let htmlAEstrenar = "";
-    array.forEach(peli => {
-        htmlAEstrenar += `
-                 <div class="card-pelicula">
-                    <img class="pelicula-img" src="${peli.poster_url}" alt="${peli.nombre}">
-                    <h3>${peli.nombre}</h3>
-                </div>
-        `;
-    });
-
-    contenedorAEstrenar.innerHTML = htmlAEstrenar;
-}
-
-obtenerPeliculasCartelera();
-obtenerPeliculasAEstrenar();
+obtenerProductos();

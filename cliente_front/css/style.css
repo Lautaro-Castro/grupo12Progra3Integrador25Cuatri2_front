@@ -60,14 +60,14 @@ hr {
     background-color: darkgray;
 }
 
-#contenedor-cartelera, #contenedor-a-estrenar {
+#contenedor-cartelera, #contenedor-a-estrenar, #contenedor-productos {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     color: var(--color-secundario);
 }
 
-.card-pelicula {
+.card-pelicula, .card-producto {
     width: 350px;
     /*border: 2px solid;*/
     display: flex;
@@ -78,9 +78,15 @@ hr {
     text-align: center;
 }
 
-.pelicula-img {
+.pelicula-img{
     width: 80%;
     height: 80%;
+}
+
+.producto-img {
+    width: 80%;
+    height: 80%;
+    border-radius: 0.4rem;
 }
 
 
