@@ -12,38 +12,36 @@
     <header>
         <nav>
             <ul>
-                <li><a class="activo">Películas</a></li>
-                <li><a href="preventa.html">Pre venta</a></li>
+                <li><a href="peliculas.html">Películas</a></li>
+                <li><a class="activo">Pre venta</a></li>
                 <li><a href="candy.html">Candy</a></li>
                 <li><a href="standby.html">Salir</a></li>
             </ul>
          </nav>
     </header>
     <main>
-        <h1>Peliculas en cartelera</h1>
-        <section id="contenedor-cartelera"></section>
+        <h1>Próximos estrenos</h1>
+        <section id="contenedor-a-estrenar"></section>
     </main>
     <script>
-        let contenedorCartelera = document.getElementById("contenedor-cartelera");
         let contenedorAEstrenar = document.getElementById("contenedor-a-estrenar");
         //Se crea la url para consumir la api
         let url = "http://localhost:3000";
 
-        //Funcion para poder consumir la api y traer las peliculas en cartelera y proximos estrenos
-        async function obtenerPeliculasCartelera() {
+        async function obtenerPeliculasAEstrenar() {
             try {
-                let response = await fetch(`${url}/peliculas`);
+                let response = await fetch(`${url}/peliculasAEstrenar`);
                 console.log(response);
                 console.log(`Solicitud fetch `)
             
                 let data = await response.json();
                 console.log(data);
 
-                let peliculasCartelera = data.payload;
-                console.log(peliculasCartelera);
+                let peliculasAEstrenar = data.payload;
+                console.log(peliculasAEstrenar);
             
 
-                mostrarPeliculasCartelera(peliculasCartelera);
+                mostrarPeliculasAEstrenar(peliculasAEstrenar);
             
             } catch (error) {
                 console.error("Error obteniendo peliculas: ", error);
@@ -51,21 +49,20 @@
         }
 
         //Funcion para poder mostrar en pantalla las peliculas que trajimos de la BD
-        function mostrarPeliculasCartelera(array){
-            let htmlEnCartelera = "";
+        function mostrarPeliculasAEstrenar(array){
+            let htmlAEstrenar = "";
             array.forEach(peli => {
-                htmlEnCartelera += `
+                htmlAEstrenar += `
                          <div class="card-pelicula">
                             <img class="pelicula-img" src="${peli.poster_url}" alt="${peli.nombre}">
-                            <h3>${peli.nombre}</h3>
+                            <h2>${peli.nombre}</h2>
                         </div>
                 `;
             });
         
-            contenedorCartelera.innerHTML = htmlEnCartelera;
+            contenedorAEstrenar.innerHTML = htmlAEstrenar;
         }
-
-        obtenerPeliculasCartelera();
+        obtenerPeliculasAEstrenar();
     </script>
 </body>
 </html>
