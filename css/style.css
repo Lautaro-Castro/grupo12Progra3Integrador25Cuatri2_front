@@ -16,7 +16,6 @@ html{
 ===================*/
 nav {
     display: flex;
-    /*max-width: 800px;*/
     background-color: var(--color-principal);
     border-radius: 0.4rem;
     margin: 0 auto;
@@ -50,12 +49,27 @@ nav a.activo {
 }
 
 #contenedor-titulo {
+    position: relative;
     display: flex;
     background-color: var(--color-principal);
     border-radius: 0.4rem;
     margin: 0 auto;
+    align-items: center;
     justify-content: center;
+    font-size: 15px;
 }
+
+#contenedor-titulo a {
+    position: absolute;
+    left: 10px; 
+    color: var(--color-secundario);        
+    text-decoration: none;
+    font-size: 15px;
+}
+ #contenedor-titulo h1 {
+    margin-bottom: 7px;
+    margin-top: 7px;
+ }
 
 /*===============
     main
@@ -64,13 +78,8 @@ h1 {
     color: var(--color-secundario);
 }
 
-hr {
-    border: none;
-    height: 2px;
-    background-color: darkgray;
-}
 
-#contenedor-cartelera, #contenedor-a-estrenar, #contenedor-productos {
+#contenedor-cartelera, #contenedor-a-estrenar, #contenedor-productos, #contenedor-combos {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -87,14 +96,27 @@ hr {
     text-align: center;   
 }
 
+
+hr {
+    border: none;
+    height: 2px; 
+    background: linear-gradient(
+        to right,
+        var(--color-detalles),
+        var(--color-detalles-hover)
+    ); 
+    margin: 2rem 0; 
+    border-radius: 5px; 
+}
+
 .card-pelicula a {
     text-decoration: none;
     color: inherit;
 }
 
 .pelicula-img{
-    width: 80%;
-    height: 80%;
+    width: 200px;
+    height: 300px;
 }
 
 .producto-img {
@@ -112,10 +134,8 @@ hr {
 }
 
 #contenedor-funciones {
-    border: 2px solid white;
     display: flex;
     justify-content: space-between;
-
 }
 
 .card-funcion{
@@ -130,7 +150,7 @@ hr {
     border-radius: 0.5rem;
 }
 
-.card-funcion button{
+.card-funcion button, .card-producto button {
     background-color: var(--color-detalles);
     border: none;
     font-size: 1rem;
@@ -140,17 +160,17 @@ hr {
     font-weight: bold;
 }
 
-.card-funcion button:hover {
+.card-funcion button:hover, .card-producto button:hover {
     background-color: #F5BB0F;
     transform: scale(1.05);
 }
 
-.card-funcion button:active {
+.card-funcion button:active, .card-producto button:active {
     background-color: #B98A07;    
     transform: scale(0.97);
 }
 
-.card-funcion input{
+.card-funcion input, .card-producto input {
     background-color: #1E1E1E;
     color: #EDEDED;
     border: 1px solid #444;
