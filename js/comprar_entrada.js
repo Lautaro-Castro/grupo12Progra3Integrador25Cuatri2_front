@@ -1,9 +1,49 @@
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
+const preventa = params.get("preventa");
 
-const barraTitulo = document.getElementById("contenedor-titulo");
-barraTitulo.innerHTML += `<h1>Comprando entradas para ${id}</h1>`;
+//Se crea la url para consumir la api
+let url = "http://localhost:3000";
 
+//Funcion para poder consumir la api y traer la pelicula por id
+async function obtenerPeliculaPorId(id) {
+    try {
+        let response = await fetch(`${url}/api/peliculas/${id}`);
+        console.log(response);
+        console.log(`Solicitud fetch `)
+    
+        let data = await response.json();
+        console.log(data);
+
+        let pelicula = data.payload;
+        console.log(pelicula);
+
+        mostrarDatosPelicula(pelicula);
+    
+    } catch (error) {
+        console.error("Error obteniendo peliculas: ", error);
+    }
+    
+}
+
+async function mostrarDatosPelicula(pelicula) {
+
+    const posterPelicula = document.getElementById("poster-pelicula");
+    posterPelicula.innerHTML += `<img class="pelicula-img" src="${pelicula.poster_url}"     alt="hola">`;
+    const barraTitulo = document.getElementById("contenedor-titulo");
+    if(preventa === "0"){
+        barraTitulo.innerHTML += `
+        <a href="peliculas.html"> &lt; Volver</a>
+        <h1>Comprando entradas para ${pelicula.nombre}</h1>`;
+    }
+    else{
+        barraTitulo.innerHTML += `
+        <a href="preventa.html"> &lt; Volver</a>
+        <h1>Comprando entradas para ${pelicula.nombre} (Pre venta)</h1>`
+    }
+    
+
+}
 const selectorFormatos = document.getElementById("selector-formatos");
 const arrayFormatos = [
     {"id":1, "nombre": "2D"},
@@ -41,11 +81,6 @@ function listarFiltroIdiomas(array){
 
     selectorIdiomas.innerHTML += htmlIdiomas;
 }
-
-//Mostramos el poster de la pelicula seleccionada
-const posterPelicula = document.getElementById("poster-pelicula");
-let urlPeli = "https://sacnkprodarcms.blob.core.windows.net/content/posters/HO00011196.jpg";
-posterPelicula.innerHTML += `<img class="pelicula-img" src="${urlPeli}" alt="hola">`;
 
 const funciones = [
     {"id": 1, 
@@ -100,7 +135,7 @@ function listarFunciones(array){
     contenedorFunciones.innerHTML += htmlFunciones;
 }
 
-
+obtenerPeliculaPorId(id);
 listarFiltroFormatos(arrayFormatos);
 listarFiltroIdiomas(arrayIdiomas);
 listarFunciones(funciones);
