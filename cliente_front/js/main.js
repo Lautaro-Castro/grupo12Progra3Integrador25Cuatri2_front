@@ -90,7 +90,7 @@ function listarFunciones(array){
                 <p><strong>Butacas disponibles: </strong> ${funcion.butacas_disponibles}</p>
                 <div class="fila-input">
                 <label for="cantidad-funcion-${funcion.id}"><strong>Entradas:</strong></label>
-                <input type="number" id="cantidad-funcion-${funcion.id}" min="1" max="${funcion.butacas_disponibles}" value="1">
+                <input type="number" id="cantidad-funcion-${funcion.id}" min="0" max="${funcion.butacas_disponibles}" value="0">
                 </div>
                 <button id="agregar-funcion-${funcion.id}">Agregar</button>
             </div>
