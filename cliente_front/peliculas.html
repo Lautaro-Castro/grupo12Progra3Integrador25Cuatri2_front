@@ -54,10 +54,13 @@
         function mostrarPeliculasCartelera(array){
             let htmlEnCartelera = "";
             array.forEach(peli => {
+                //Se crean los div con las peliculas a mostrar y el <a> con href a la pantalla de compra, pasando el id como parametro con el ?
                 htmlEnCartelera += `
                          <div class="card-pelicula">
+                            <a class="pelicula-img" href="comprar-entrada.html?id=${peli.id}">
                             <img class="pelicula-img" src="${peli.poster_url}" alt="${peli.nombre}">
                             <h3>${peli.nombre}</h3>
+                            </a>
                         </div>
                 `;
             });
