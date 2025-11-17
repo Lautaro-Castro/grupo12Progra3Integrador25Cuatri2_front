@@ -1,44 +1,106 @@
-//Se obtiene el contendor html donde iran los productos
-let contendorProductos = document.getElementById("contenedor-productos");
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
 
-//Se crea la url para consumir la api
-let url = "http://localhost:3000";
+const barraTitulo = document.getElementById("contenedor-titulo");
+barraTitulo.innerHTML += `<h1>Comprando entradas para ${id}</h1>`;
 
-//Funcion para poder consumir la api y traer los productos
-async function obtenerProductos() {
-    try {
-        let response = await fetch(`${url}/productos`);
-        console.log(response);
-        console.log(`Solicitud fetch `)
-    
-        let data = await response.json();
-        console.log(data);
-        
-        let productos = data.payload;
-        console.log(productos);
-        
-        mostrarProductos(productos);
-    
-    } catch (error) {
-        console.error("Error obteniendo productos: ", error);
-    }
-}
+const selectorFormatos = document.getElementById("selector-formatos");
+const arrayFormatos = [
+    {"id":1, "nombre": "2D"},
+    {"id":2, "nombre": "3D"},
+    {"id":3, "nombre": "4D"}
+];
 
-//Funcion para poder mostrar en pantalla los productos que trajimos de la BD
-function mostrarProductos(array){
-    let htmlProductos = "";
-    array.forEach(prod => {
-        htmlProductos += `
-                    <div class="card-producto">
-                    <img class="producto-img" src="${prod.imagen_url}" alt="${prod.nombre}">
-                    <h2>${prod.nombre}</h2>
-                    <p>${prod.descripcion}
-                    <br><strong>$${prod.precio}</strong></p>
-                </div>
+//Funcion para cargar los formatos en el filtro
+function listarFiltroFormatos(array){
+    let htmlFormatos = "";
+    array.forEach(formato => {
+        htmlFormatos += `
+            <option value="${formato.id}">${formato.nombre}</option>
         `;
     });
 
-    contendorProductos.innerHTML = htmlProductos;
+    selectorFormatos.innerHTML += htmlFormatos;
 }
 
-obtenerProductos();
+
+const selectorIdiomas = document.getElementById("selector-idiomas");
+const arrayIdiomas = [
+    {"id":1, "nombre": "Español"},
+    {"id":2, "nombre": "Subtitulado"}
+];
+
+//Funcion para cargar los idiomas en el filtro
+function listarFiltroIdiomas(array){
+    let htmlIdiomas = "";
+    array.forEach(idioma => {
+        htmlIdiomas += `
+            <option value="${idioma.id}">${idioma.nombre}</option>
+        `;
+    });
+
+    selectorIdiomas.innerHTML += htmlIdiomas;
+}
+
+//Mostramos el poster de la pelicula seleccionada
+const posterPelicula = document.getElementById("poster-pelicula");
+let urlPeli = "https://sacnkprodarcms.blob.core.windows.net/content/posters/HO00011196.jpg";
+posterPelicula.innerHTML += `<img class="pelicula-img" src="${urlPeli}" alt="hola">`;
+
+const funciones = [
+    {"id": 1, 
+        "pelicula_id": "Pradator",
+        "formato_id": "2D",
+        "idioma_id": "Español",
+        "fecha": "2025-12-11",
+        "hora": "15:30",
+        "butacas_disponibles": 5,
+        "precio": 14000
+    },
+    {"id": 2, 
+        "pelicula_id": "Pradator",
+        "formato_id": "3D",
+        "idioma_id": "Subtitulado",
+        "fecha": "2025-12-11",
+        "hora": "17:30",
+        "butacas_disponibles": 3,
+        "precio": 16000
+    },
+    {"id": 3, 
+        "pelicula_id": "Pradator",
+        "formato_id": "4D",
+        "idioma_id": "Español",
+        "fecha": "2025-12-11",
+        "hora": "19:30",
+        "butacas_disponibles": 2,
+        "precio": 18000
+    }
+];
+
+const contenedorFunciones = document.getElementById("contenedor-funciones");
+//Funcion para cargar las funciones
+function listarFunciones(array){
+    let htmlFunciones = "";
+    array.forEach(funcion => {
+        htmlFunciones += `
+            <div class="card-funcion">
+                <p><strong>Formato: </strong> ${funcion.formato_id}</p>
+                <p><strong>Idioma: </strong> ${funcion.idioma_id}</p>
+                <p><strong>Precio: </strong> ${funcion.precio}</p>
+                <p><strong>Butacas disponibles: </strong> ${funcion.butacas_disponibles}</p>
+                <div class="fila-input">
+                <label for="cantidad-funcion-${funcion.id}"><strong>Entradas:</strong></label>
+                <input type="number" id="cantidad-funcion-${funcion.id}" min="1" max="${funcion.butacas_disponibles}" value="1">
+                </div>
+                <button id="agregar-funcion-${funcion.id}">Agregar</button>
+            </div>
+        `;
+    });
+
+    contenedorFunciones.innerHTML += htmlFunciones;
+}
+
+
+listarFiltroFormatos(arrayFormatos);
+listarFiltroIdiomas(arrayIdiomas);
+listarFunciones(funciones);

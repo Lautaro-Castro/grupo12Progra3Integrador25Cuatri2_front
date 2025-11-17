@@ -2,7 +2,10 @@
     --color-principal: #b51616;
     --color-secundario: #fcf0e8;
     --color-detalles: #dea509;
+    --color-detalles-hover: #F5BB0F;
     --color-background: #212121;
+    --color-background-card-funcion: #2E2E2E;
+    --color-borde-card-funcion: #444;
 }
 
 html{
@@ -46,6 +49,14 @@ nav a.activo {
   text-shadow: 2px 2px 5px black;
 }
 
+#contenedor-titulo {
+    display: flex;
+    background-color: var(--color-principal);
+    border-radius: 0.4rem;
+    margin: 0 auto;
+    justify-content: center;
+}
+
 /*===============
     main
 ================*/
@@ -56,7 +67,6 @@ h1 {
 hr {
     border: none;
     height: 2px;
-    /*background-color: var(--color-detalles);*/
     background-color: darkgray;
 }
 
@@ -69,13 +79,17 @@ hr {
 
 .card-pelicula, .card-producto {
     width: 350px;
-    /*border: 2px solid;*/
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 450px;
     margin: 2px;
-    text-align: center;
+    text-align: center;   
+}
+
+.card-pelicula a {
+    text-decoration: none;
+    color: inherit;
 }
 
 .pelicula-img{
@@ -89,4 +103,98 @@ hr {
     border-radius: 0.4rem;
 }
 
+#poster-pelicula {
+    display: flex;
+    justify-content: center;
+    margin: 10px auto;
+    width: 20%;
+    height: 20%;
+}
+
+#contenedor-funciones {
+    border: 2px solid white;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.card-funcion{
+    display: flex;
+    flex-direction: column;
+    margin: 5px auto;
+    padding: 8px ;
+    justify-content: center;
+    color: var(--color-secundario);
+    background-color: var(--color-background-card-funcion);
+    border: 1px solid var(--color-borde-card-funcion);
+    border-radius: 0.5rem;
+}
+
+.card-funcion button{
+    background-color: var(--color-detalles);
+    border: none;
+    font-size: 1rem;
+    border-radius: 0.4rem;
+    margin: 4px auto;
+    width: 60%;
+    font-weight: bold;
+}
+
+.card-funcion button:hover {
+    background-color: #F5BB0F;
+    transform: scale(1.05);
+}
+
+.card-funcion button:active {
+    background-color: #B98A07;    
+    transform: scale(0.97);
+}
+
+.card-funcion input{
+    background-color: #1E1E1E;
+    color: #EDEDED;
+    border: 1px solid #444;
+    border-radius: 0.3rem;
+    width: 20%; 
+    margin: 4px auto;
+}
+
+.fila-input {
+    display: flex;
+    align-items: center; 
+    gap: 0.5rem;         
+}
+
+/*==========
+   Filtros
+==========*/
+
+.select-filtros {
+  border: 2px solid #dddddd;
+  background: #2a2a2a;
+  padding: 10px;
+  transition: 0.4s;
+  color: #e0e0e0;
+}
+
+.select-filtros:hover{
+  background: #6ab1ff;
+}
+
+.select-filtros:focus {
+    outline: none;
+    border-color: #4a90e2;
+}
+
+.select-filtros option {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+}
+
+#contenedor-filtros {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+}
 
