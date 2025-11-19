@@ -5,12 +5,17 @@ const preventa = params.get("preventa");
 //Se crea la url para consumir la api
 let url = "http://localhost:3000";
 
+
+/*===============
+    PELICULA
+===============*/
+
 //Funcion para poder consumir la api y traer la pelicula por id
 async function obtenerPeliculaPorId(id) {
     try {
         let response = await fetch(`${url}/api/peliculas/${id}`);
         console.log(response);
-        console.log(`Solicitud fetch `)
+        console.log(`Solicitud fetch pelicula por id`)
     
         let data = await response.json();
         console.log(data);
@@ -44,15 +49,33 @@ async function mostrarDatosPelicula(pelicula) {
     
 
 }
+
+/*===============
+    FORMATOS
+===============*/
 const selectorFormatos = document.getElementById("selector-formatos");
-const arrayFormatos = [
-    {"id":1, "nombre": "2D"},
-    {"id":2, "nombre": "3D"},
-    {"id":3, "nombre": "4D"}
-];
+
+async function obtenerFormatos(req, res) {
+    try {
+        let response = await fetch(`${url}/api/formatos`);
+        console.log(response);
+        console.log(`Solicitud fetch formatos`)
+    
+        let data = await response.json();
+        console.log(data);
+
+        let formatos = data.payload;
+        console.log(formatos);
+
+        cargarFiltroFormatos(formatos);
+    
+    } catch (error) {
+        console.error("Error obteniendo formatos: ", error);
+    }
+}
 
 //Funcion para cargar los formatos en el filtro
-function listarFiltroFormatos(array){
+function cargarFiltroFormatos(array){
     let htmlFormatos = "";
     array.forEach(formato => {
         htmlFormatos += `
@@ -64,14 +87,33 @@ function listarFiltroFormatos(array){
 }
 
 
+/*===============
+    IDIOMAS
+===============*/
 const selectorIdiomas = document.getElementById("selector-idiomas");
-const arrayIdiomas = [
-    {"id":1, "nombre": "Español"},
-    {"id":2, "nombre": "Subtitulado"}
-];
+
+async function obtenerIdiomas(req, res) {
+    try {
+        
+        let response = await fetch(`${url}/api/idiomas`);
+        console.log(response);
+        console.log(`Solicituda fetch idiomas`);
+
+        let data = await response.json();
+        console.log(data);
+
+        let idiomas = data.payload;
+        console.log(idiomas);
+
+        cargarFiltroIdiomas(idiomas);
+        
+    } catch (error) {
+        console.error("Error obteniendo idiomas: ", error);
+    }
+}
 
 //Funcion para cargar los idiomas en el filtro
-function listarFiltroIdiomas(array){
+function cargarFiltroIdiomas(array){
     let htmlIdiomas = "";
     array.forEach(idioma => {
         htmlIdiomas += `
@@ -81,6 +123,7 @@ function listarFiltroIdiomas(array){
 
     selectorIdiomas.innerHTML += htmlIdiomas;
 }
+
 
 const funciones = [
     {"id": 1, 
@@ -136,6 +179,6 @@ function listarFunciones(array){
 }
 
 obtenerPeliculaPorId(id);
-listarFiltroFormatos(arrayFormatos);
-listarFiltroIdiomas(arrayIdiomas);
+obtenerFormatos();
+obtenerIdiomas();
 listarFunciones(funciones);
