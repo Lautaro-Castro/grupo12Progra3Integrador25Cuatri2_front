@@ -31,7 +31,7 @@ function mostrarPeliculasCartelera(array){
         //Se crean los div con las peliculas a mostrar y el <a> con href a la pantalla de compra, pasando el id como parametro con el ?
         htmlEnCartelera += `
             <div class="card-pelicula">
-                <a class="pelicula-img" href="comprar-entrada.html?id=${peli.id}&preventa=0">
+                <a class="pelicula-img" href="comprar-entrada.html?pelicula_id=${peli.id}&preventa=0">
                 <img class="pelicula-img" src="${peli.poster_url}" alt="${peli.nombre}">
                 <h2>${peli.nombre}</h2>
                 </a>

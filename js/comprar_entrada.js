@@ -1,5 +1,6 @@
 const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
+const pelicula_id = params.get("pelicula_id");
+console.log(`${pelicula_id}`);
 const preventa = params.get("preventa");
 
 //Se crea la url para consumir la api
@@ -11,9 +12,9 @@ let url = "http://localhost:3000";
 ===============*/
 
 //Funcion para poder consumir la api y traer la pelicula por id
-async function obtenerPeliculaPorId(id) {
+async function obtenerPeliculaPorId(pelicula_id) {
     try {
-        let response = await fetch(`${url}/api/peliculas/${id}`);
+        let response = await fetch(`${url}/api/peliculas/${pelicula_id}`);
         console.log(response);
         console.log(`Solicitud fetch pelicula por id`)
     
@@ -125,60 +126,94 @@ function cargarFiltroIdiomas(array){
 }
 
 
-const funciones = [
-    {"id": 1, 
-        "pelicula_id": "Pradator",
-        "formato_id": "2D",
-        "idioma_id": "Español",
-        "fecha": "2025-12-11",
-        "hora": "15:30",
-        "butacas_disponibles": 5,
-        "precio": 14000
-    },
-    {"id": 2, 
-        "pelicula_id": "Pradator",
-        "formato_id": "3D",
-        "idioma_id": "Subtitulado",
-        "fecha": "2025-12-11",
-        "hora": "17:30",
-        "butacas_disponibles": 3,
-        "precio": 16000
-    },
-    {"id": 3, 
-        "pelicula_id": "Pradator",
-        "formato_id": "4D",
-        "idioma_id": "Español",
-        "fecha": "2025-12-11",
-        "hora": "19:30",
-        "butacas_disponibles": 2,
-        "precio": 18000
-    }
-];
-
+/*===============
+    FUNCIONES
+===============*/
 const contenedorFunciones = document.getElementById("contenedor-funciones");
-//Funcion para cargar las funciones
-function listarFunciones(array){
+const botonFiltrar = document.getElementById("btn-filtrar");
+const botonLimpiarFiltros = document.getElementById("btn-limpiar-filtros");
+
+async function obtenerFunciones(formato_id = null, idioma_id = null) {
+    try {
+
+        let urlFetch = `${url}/api/funciones?pelicula_id=${pelicula_id}&preventa=${preventa}`;
+        if(formato_id) urlFetch += `&formato_id=${formato_id}`;
+        if(idioma_id) urlFetch += `&idioma_id=${idioma_id}`;
+
+        let response = await fetch(urlFetch);
+        console.log(response);
+        console.log(`Solicituda fetch funciones`);
+
+        let data = await response.json();
+        console.log(data);
+
+        let funciones = data.payload;
+        console.log(funciones);
+
+        cargarFunciones(funciones);
+
+    } catch (error) {
+        console.error("Error obteniendo funciones: ", error);
+    }
+}
+
+//Funcion para cargar las funciones de la pelicula
+function cargarFunciones(array){
     let htmlFunciones = "";
-    array.forEach(funcion => {
+    if(array.length === 0){
+        htmlFunciones += `<div class="card-funcion">
+                <h1><strong>No hay funciones disponibles</strong></h1>
+                </div>`;
+    }else{
+        array.forEach(funcion => {
+        //Le damos a la fecha y al horario el formato correcto para ser mostrados
+        let fechaYHora = formatearFechaYHora(funcion.fecha, funcion.hora);
         htmlFunciones += `
             <div class="card-funcion">
-                <p><strong>Formato: </strong> ${funcion.formato_id}</p>
-                <p><strong>Idioma: </strong> ${funcion.idioma_id}</p>
+                <p><strong>Formato: </strong> ${funcion.formato}</p>
+                <p><strong>Idioma: </strong> ${funcion.idioma}</p>
                 <p><strong>Precio: </strong> ${funcion.precio}</p>
+                <p><strong>Fecha: </strong> ${fechaYHora.fecha}</p>
+                <p><strong>Hora: </strong> ${fechaYHora.hora}</p>
+                <p><strong>Sala: </strong> ${funcion.sala}</p>
                 <p><strong>Butacas disponibles: </strong> ${funcion.butacas_disponibles}</p>
                 <div class="fila-input">
                 <label for="cantidad-funcion-${funcion.id}"><strong>Entradas:</strong></label>
                 <input type="number" id="cantidad-funcion-${funcion.id}" min="0" max="${funcion.butacas_disponibles}" value="0">
                 </div>
-                <button id="agregar-funcion-${funcion.id}">Agregar</button>
+                <button id="agregar-funcion-${funcion.id}" class="agregar-funcion">Agregar</button>
             </div>
         `;
-    });
+        });
+    }
 
-    contenedorFunciones.innerHTML += htmlFunciones;
+    contenedorFunciones.innerHTML = htmlFunciones;
 }
 
-obtenerPeliculaPorId(id);
+function formatearFechaYHora(fecha, hora){
+
+    fecha = fecha.split("T")[0].split("-").reverse().join("/");
+    hora = hora.split(":");
+    hora.pop();
+    hora = hora.join(":");
+
+    return { fecha: fecha, hora: hora};
+}
+
+botonFiltrar.addEventListener("click", () => {
+    let formatoSeleccionado = selectorFormatos.value || null;
+    let idiomaSeleccionado = selectorIdiomas.value || null;
+    obtenerFunciones(formatoSeleccionado, idiomaSeleccionado);
+    console.log(`Formato: ${formatoSeleccionado}, Idioma: ${idiomaSeleccionado}`)
+});
+
+botonLimpiarFiltros.addEventListener("click", (e) => {
+    selectorFormatos.value = "";
+    selectorIdiomas.value = "";
+    obtenerFunciones();
+});
+
+obtenerPeliculaPorId(pelicula_id);
 obtenerFormatos();
 obtenerIdiomas();
-listarFunciones(funciones);
+obtenerFunciones();

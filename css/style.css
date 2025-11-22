@@ -135,24 +135,29 @@ hr {
 
 #contenedor-funciones {
     display: flex;
+    width: fit-content;
     justify-content: space-between;
+    gap: 60px;
+    margin: 10px auto;
 }
 
 .card-funcion{
     display: flex;
     flex-direction: column;
     margin: 5px auto;
-    padding: 8px ;
+    padding: 8px;
     justify-content: center;
     color: var(--color-secundario);
     background-color: var(--color-background-card-funcion);
     border: 1px solid var(--color-borde-card-funcion);
     border-radius: 0.5rem;
 }
-
-.card-funcion button, .card-producto button {
+.card-funcion p {
+    margin: 4px;
+}
+button {
     background-color: var(--color-detalles);
-    border: none;
+    border: solid white 2px;
     font-size: 1rem;
     border-radius: 0.4rem;
     margin: 4px auto;
@@ -160,12 +165,12 @@ hr {
     font-weight: bold;
 }
 
-.card-funcion button:hover, .card-producto button:hover {
+button:hover {
     background-color: #F5BB0F;
     transform: scale(1.05);
 }
 
-.card-funcion button:active, .card-producto button:active {
+button:active {
     background-color: #B98A07;    
     transform: scale(0.97);
 }
@@ -212,9 +217,18 @@ hr {
 }
 
 #contenedor-filtros {
+    width: fit-content;
     display: flex;
     justify-content: center;
     gap: 40px;
-    margin-top: 20px;
+    margin: 20px auto;
 }
 
+#btn-filtrar{
+    width: 100px;
+    height: 40px;
+}
+
+.agregar-funcion{
+    height: 30px;
+}
