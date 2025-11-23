@@ -1,6 +1,10 @@
 //Se obtienen los contendores html donde iran los productos y los combos
 let contendorProductos = document.getElementById("contenedor-productos");
 let contenedorCombos = document.getElementById("contenedor-combos");
+
+//Obtengo el boton de finalizar compra
+const botonFinalizarCompra = document.getElementById("btn-finalizar-compra");
+
 //verifico que no sea null y tenga un array vacio
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
@@ -33,7 +37,7 @@ function mostrarProductos(array){
     let htmlProductos = "";
     array.forEach(prod => {
         htmlProductos += `
-                    <div class="card-producto">
+                <div class="card-producto">
                     <img class="producto-img" src="${prod.imagen_url}" alt="${prod.nombre}">
                     <h2>${prod.nombre}</h2>
                     <p>${prod.descripcion}
@@ -143,7 +147,7 @@ function agregarAlCarrito(producto, cantidad) {
     let existente = carrito.find(item => item.id === producto.id);
 
     if(existente){
-        existente.cantidad +=cantidad;
+        existente.cantidad === 3 ? alert("No se pudo agregar al carrito! La cantidad maxima por producto es 3.") : existente.cantidad +=cantidad;
     }
     else{
         carrito.push({
@@ -178,6 +182,7 @@ function renderizarCarrito(){
     if(carrito.length === 0){
         contenedor.innerHTML = "<p>El carrito esta vacio</p>";
         totalHTML.innerHTML = "<strong>Total: $0 </strong>";
+        actualizarBotonFinalizarCompra();
         return;
     }
 
@@ -210,14 +215,23 @@ function renderizarCarrito(){
             eliminarDelCarrito(id);
         });
     });
-
+    actualizarBotonFinalizarCompra();
 }
 
-
+function actualizarBotonFinalizarCompra(){
+    if(carrito.length === 0){
+        botonFinalizarCompra.disabled = true;
+    }
+    else
+    {
+      botonFinalizarCompra.disabled = false;  
+    }
+}
 
 obtenerProductos();
 obtenerCombos();
 renderizarCarrito();
+actualizarBotonFinalizarCompra();
 
 // Evento del botón "Vaciar carrito"
 const btnVaciar = document.getElementById("btn-vaciar-carrito");
