@@ -319,7 +319,7 @@ button:active {
     color: var(--color-detalles);
 }
 
-/*BOTON VACIAR CARRITO EN PROCESO ===================????????????????????????????*/
+/*BOTON VACIAR CARRITO*/
 .btn-vaciar-carrito {
     margin-top: 1rem;
     padding: 0.5rem;
@@ -382,6 +382,23 @@ button:active {
     background-color: var(--color-detalles);
     color: #000;
 }
+
+/*=========================
+    Compra entradas - detalles 
+==========================*/
+.detalles-compra-peliculas{
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    margin-left: 20px;
+    width: 350px;
+    color: var(--color-secundario);
+}
+
+.detalles-compra-peliculas p, h3{
+    margin: 5px;
+}
+
 
 /* =========================
    RESPONSIVE: PANTALLAS CHICAS
