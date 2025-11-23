@@ -232,3 +232,133 @@ button:active {
 .agregar-funcion{
     height: 30px;
 }
+
+
+/*================
+    Carrito
+================*/
+#candy-layout {
+    max-width: 1200px;
+    margin: 20px auto;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+/* Columna izquierda: productos + combos */
+#candy-contenido {
+    flex: 1; /* ocupa todo el espacio disponible */
+}
+
+/* Ajusto un poco los contenedores para que no se peguen al borde */
+#contenedor-productos, #contenedor-combos {
+    margin-top: 10px;
+}
+
+/* COLUMNA DERECHA: CARRITO */
+#carrito-box {
+    background-color: var(--color-background-card-funcion);
+    border: 1px solid var(--color-borde-card-funcion);
+    border-radius: 0.6rem;
+    padding: 1rem;
+    width: 280px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: sticky;
+    top: 20px;
+    color: var(--color-secundario);
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
+    flex-shrink: 0; /* que no se haga más chico al achicar la pantalla */
+}
+
+#carrito-box h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--color-detalles);
+    font-size: 1.3rem;
+    text-shadow: 0px 0px 4px black;
+}
+
+/* Items dentro del carrito */
+#carrito-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+/* Tarjeta de cada item */
+.carrito-item {
+    background-color: #1b1b1b;
+    border: 1px solid var(--color-borde-card-funcion);
+    padding: 0.6rem 0.8rem;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.carrito-item p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Total del carrito */
+#carrito-total {
+    margin-top: 1rem;
+    text-align: right;
+    font-size: 1.1rem;
+    color: var(--color-detalles);
+}
+
+/*BOTON VACIAR CARRITO EN PROCESO ===================????????????????????????????*/
+.btn-vaciar-carrito {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    width: 100%;
+    background-color: var(--color-principal);
+    border: 2px solid white;
+    border-radius: 0.4rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-vaciar-carrito:hover {
+    background-color: #d81d1d;
+}
+
+/* Botón eliminar item */
+.btn-eliminar-item {
+    background-color: transparent;
+    border: 1px solid var(--color-detalles);
+    color: var(--color-detalles);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-eliminar-item:hover {
+    background-color: var(--color-detalles);
+    color: #000;
+}
+
+/* =========================
+   RESPONSIVE: PANTALLAS CHICAS
+========================= */
+
+@media (max-width: 900px) {
+    #candy-layout {
+        flex-direction: column;
+    }
+
+    #carrito-box {
+        position: static;
+        width: 100%;
+        max-height: none;
+        margin-top: 10px;
+    }
+}
