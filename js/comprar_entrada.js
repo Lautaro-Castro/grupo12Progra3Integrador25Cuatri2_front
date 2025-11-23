@@ -35,7 +35,14 @@ async function obtenerPeliculaPorId(pelicula_id) {
 async function mostrarDatosPelicula(pelicula) {
 
     const posterPelicula = document.getElementById("poster-pelicula");
-    posterPelicula.innerHTML += `<img class="pelicula-img" src="${pelicula.poster_url}"     alt="hola">`;
+    posterPelicula.innerHTML += `<img class="pelicula-img" src="${pelicula.poster_url}"     alt="${pelicula.nombre}">
+    <div class= "detalles-compra-peliculas">
+        <p><strong>${pelicula.sinopsis}</strong></p>
+        <p><strong>Duracion: ${pelicula.duracion} min<strong></p>
+        <h3>Clasificacion: ${pelicula.clasificacion}</h3>
+        <p>Distribuidor: ${pelicula.distribuidor} </p>
+    </div>`;
+
     const barraTitulo = document.getElementById("contenedor-titulo");
     if(preventa === "0"){
         barraTitulo.innerHTML += `
@@ -47,9 +54,10 @@ async function mostrarDatosPelicula(pelicula) {
         <a href="preventa.html"> &lt; Volver</a>
         <h1>Comprando entradas para ${pelicula.nombre} (Pre venta)</h1>`
     }
-    
 
 }
+
+
 
 /*===============
     FORMATOS
