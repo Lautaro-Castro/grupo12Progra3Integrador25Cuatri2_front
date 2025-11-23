@@ -1,6 +1,8 @@
 //Se obtienen los contendores html donde iran los productos y los combos
 let contendorProductos = document.getElementById("contenedor-productos");
 let contenedorCombos = document.getElementById("contenedor-combos");
+//verifico que no sea null y tenga un array vacio
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 //Se crea la url para consumir la api
 let url = "http://localhost:3000";
@@ -46,6 +48,25 @@ function mostrarProductos(array){
     });
 
     contendorProductos.innerHTML = htmlProductos;
+
+     array.forEach(prod => {
+        let boton = document.getElementById(`agregar-combo-${prod.id}`);
+        let inputCantidad = document.getElementById(`cantidad-combos-${prod.id}`);
+
+        boton.addEventListener("click", () => {
+            const cantidad = Number(inputCantidad.value);
+
+            const producto = {
+                id: prod.id,
+                nombre: prod.nombre,
+                precio: prod.precio,
+                imagen: prod.imagen_url
+            };
+
+            agregarAlCarrito(producto, cantidad);
+        });
+    });
+
 }
 
 async function obtenerCombos() {
@@ -86,7 +107,120 @@ function mostrarCombos(array){
     });
 
     contenedorCombos.innerHTML = htmlCombos;
+    array.forEach(combo => {
+    let boton = document.getElementById(`agregar-combo-${combo.id}`);
+    let inputCantidad = document.getElementById(`cantidad-combos-${combo.id}`);
+
+    boton.addEventListener("click", () => {
+        const cantidad = Number(inputCantidad.value);
+
+        const producto = {
+            id: combo.id,
+            nombre: combo.nombre,
+            precio: combo.precio,
+            imagen: combo.imagen_url
+        };
+
+        agregarAlCarrito(producto, cantidad);
+    });
+});
 }
+
+/*
+ ===============
+    Carrito 
+ ===============
+ */
+function guardarCarrito() {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
+function agregarAlCarrito(producto, cantidad) {
+    if (cantidad <= 0){
+        alert("Debe seleccionar una cantidad mayor a 0");
+        return;
+    }
+    let existente = carrito.find(item => item.id === producto.id);
+
+    if(existente){
+        existente.cantidad +=cantidad;
+    }
+    else{
+        carrito.push({
+            ...producto,
+            cantidad:cantidad
+        });
+    }
+    guardarCarrito()
+    renderizarCarrito();
+}
+
+//Vacia todo el carrito
+function vaciarCarrito() {
+    carrito = [];
+    guardarCarrito();
+    renderizarCarrito();
+}
+
+// Elimina un solo producto por id
+function eliminarDelCarrito(id) {
+    carrito = carrito.filter(item => item.id !== id);
+    guardarCarrito();
+    renderizarCarrito();
+}
+
+function renderizarCarrito(){
+    let contenedor = document.getElementById("carrito-items");
+    let totalHTML = document.getElementById("carrito-total");
+
+    if (!contenedor || !totalHTML) return;
+
+    if(carrito.length === 0){
+        contenedor.innerHTML = "<p>El carrito esta vacio</p>";
+        totalHTML.innerHTML = "<strong>Total: $0 </strong>";
+        return;
+    }
+
+    let html = "";
+    let total =0;
+
+    carrito.forEach(item => {
+        let subtotal = item.precio * item.cantidad;
+        total += subtotal;
+
+        html +=`
+            <div class="carrito-item">
+                <div>
+                    <p>${item.nombre} x ${item.cantidad}</p>
+                    <p>$${subtotal}</p>
+                </div>
+                <button class="btn-eliminar-item" data-id="${item.id}" title="Eliminar"> 
+                x
+                </button>
+            </div>
+        `;
+    });
+    contenedor.innerHTML = html;
+    totalHTML.innerHTML = `<strong>Total: $${total}</strong>`;
+
+    const botonesEliminar = document.querySelectorAll(".btn-eliminar-item");
+    botonesEliminar.forEach(boton => {
+        boton.addEventListener("click", () => {
+            const id = Number(boton.dataset.id);
+            eliminarDelCarrito(id);
+        });
+    });
+
+}
+
+
 
 obtenerProductos();
 obtenerCombos();
+renderizarCarrito();
+
+// Evento del botón "Vaciar carrito"
+const btnVaciar = document.getElementById("btn-vaciar-carrito");
+if (btnVaciar) {
+    btnVaciar.addEventListener("click", vaciarCarrito);
+}
