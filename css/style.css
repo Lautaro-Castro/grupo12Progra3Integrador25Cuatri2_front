@@ -184,7 +184,16 @@ button:active {
     margin: 4px auto;
 }
 
+.card-producto p, input {
+    margin: 1px auto;
+}
+
+.card-producto h2 {
+    margin-bottom: 2px;
+}
+
 .fila-input {
+    padding-top: 2px;
     display: flex;
     align-items: center; 
     gap: 0.5rem;         
@@ -324,6 +333,34 @@ button:active {
 
 .btn-vaciar-carrito:hover {
     background-color: #d81d1d;
+}
+
+/* Boton finalizar compra */
+.btn-finalizar-compra {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    width: 100%;
+    background-color: var(--color-detalles);
+    border: 2px solid white;
+    border-radius: 0.4rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-finalizar-compra:hover {
+    background-color: var(--color-detalles-hover);
+}
+
+.btn-finalizar-compra:disabled {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    width: 100%;
+    background-color: #4f4f4f;
+    color: #8c8c8c;
+    border: 1px solid #4f4f4f;
+    border-radius: 0.4rem;
+    font-weight: bold;
+    cursor: not-allowed;
 }
 
 /* Botón eliminar item */
