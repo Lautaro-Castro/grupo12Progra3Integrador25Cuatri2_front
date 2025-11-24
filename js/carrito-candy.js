@@ -22,7 +22,7 @@ function agregarAlCarrito(producto, cantidad) {
     let existente = carrito.find(item => item.id === producto.id);
 
     if(existente){
-        existente.cantidad === 3 ? alert("No se pudo agregar al carrito! La cantidad maxima por producto es 3.") : existente.cantidad +=cantidad;
+        existente.cantidad + cantidad > 3 ? alert("No se pudo agregar al carrito! La cantidad maxima por producto es 3.") : existente.cantidad +=cantidad;
     }
     else{
         carrito.push({
