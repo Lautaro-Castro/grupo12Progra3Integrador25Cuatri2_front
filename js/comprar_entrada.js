@@ -37,7 +37,8 @@ async function mostrarDatosPelicula(pelicula) {
     const posterPelicula = document.getElementById("poster-pelicula");
     posterPelicula.innerHTML += `<img class="pelicula-img" src="${pelicula.poster_url}"     alt="${pelicula.nombre}">
     <div class= "detalles-compra-peliculas">
-        <p><strong>${pelicula.sinopsis}</strong></p>
+        <p id="sinopsis" class="texto-colapsado">${pelicula.sinopsis}</p>
+        <button id="verMasBtn">Ver más</button>
         <p><strong>Duracion: ${pelicula.duracion} min<strong></p>
         <h3>Clasificacion: ${pelicula.clasificacion}</h3>
         <p>Distribuidor: ${pelicula.distribuidor} </p>
@@ -54,10 +55,36 @@ async function mostrarDatosPelicula(pelicula) {
         <a href="preventa.html"> &lt; Volver</a>
         <h1>Comprando entradas para ${pelicula.nombre} (Pre venta)</h1>`
     }
+        activarBotonVerMas();
 
 }
 
+// Funcion de BOTON ver mas
+function activarBotonVerMas(){
+    const sinopsis = document.getElementById("sinopsis");
+    const verMasBtn = document.getElementById("verMasBtn");
 
+    //por si no existe:
+    if(!sinopsis || !verMasBtn) return;
+
+    //si la sinopsis no es larga lo oculto, veo los pixeles que tiene
+    if(sinopsis.scrollHeight <= sinopsis.clientHeight + 1 ){
+        sinopsis.classList.remove("texto-colapsado");
+        verMasBtn.style.display = "none";
+        return; //no agrego el addEventListener
+    }
+
+    //si la sinapsis es larga agrego el boton 
+    verMasBtn.addEventListener("click", () => {
+        sinopsis.classList.toggle("texto-expandido");
+
+        if(sinopsis.classList.contains("texto-expandido")){
+            verMasBtn.textContent = "Ver menos";
+        }else{
+            verMasBtn.textContent = "Ver mas";
+        }
+    });
+}
 
 /*===============
     FORMATOS
