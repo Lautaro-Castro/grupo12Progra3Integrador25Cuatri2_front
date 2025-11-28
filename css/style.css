@@ -392,12 +392,36 @@ button:active {
     /* align-items: center; */
     flex-direction: column;
     margin-left: 20px;
-    width: 350px;
+    line-height: 1.4;  
+    text-align: justify; 
     color: var(--color-secundario);
 }
 
+/* lo que se ve antes de darle a Ver mas */
+.texto-colapsado {
+    max-height: 120px;  
+    overflow: hidden;
+    
+}
+
+/* Texto expandido */
+.texto-expandido {
+    max-height: none;
+    
+}
+
+ .btn-ver-mas {
+    margin-top: 8px;
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: 600;
+}   
+
 .detalles-compra-peliculas p, h3{
     margin: 5px;
+    width: 350px;
 }
 
 
