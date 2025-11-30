@@ -1,0 +1,148 @@
+:root {
+    --color-principal: #b51616;
+    --color-secundario: #fcf0e8;
+    --color-detalles: #dea509;
+    --color-detalles-hover: #F5BB0F;
+    --color-background: #212121;
+    --color-background-card-funcion: #2E2E2E;
+    --color-borde-card-funcion: #444;
+}
+
+html{
+    background-color: var(--color-background);
+}
+
+label, h1 {
+    color: var(--color-secundario);
+}
+
+
+/*===================
+       HEADER
+===================*/
+nav {
+    display: flex;
+    background-color: var(--color-principal);
+    border-radius: 0.4rem;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+nav ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding-left: 0;
+    list-style-type: none;
+}
+
+nav ul li a {
+    color: var(--color-secundario);        
+    text-decoration: none;
+    font-weight: bold;   
+}
+
+nav ul li a:hover {
+    color: var(--color-detalles);
+    text-shadow: 2px 2px 5px black;
+    font-size: 18px;
+}
+
+nav a.activo {
+  pointer-events: none;   
+  color: var(--color-detalles);
+  text-shadow: 2px 2px 5px black;
+}
+
+
+/*===================
+       MAIN
+===================*/
+.card-candy input, .card-producto input {
+    background-color: #1E1E1E;
+    color: #EDEDED;
+    border: 1px solid #444;
+    border-radius: 0.3rem;
+    width: 20%; 
+    margin: 4px auto;
+}
+
+#filtros {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card-pelicula, .card-producto {
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 450px;
+    margin: 0.1rem;
+    text-align: center;   
+}
+
+.card-pelicula p, h2 {
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+}
+
+.card-peliculas-no-encontradas{
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 450px;
+    margin: 0.1rem auto;
+    text-align: center;
+}
+
+#contenedor-cartelera, #contenedor-preventa, #contenedor-productos, #contenedor-combos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    color: var(--color-secundario);
+}
+
+.pelicula-img{
+    width: 200px;
+    height: 300px;
+}
+
+.producto-img {
+    width: 80%;
+    height: 80%;
+    border-radius: 0.4rem;
+}
+
+/*
+    BOTONES
+*/
+button {
+    background-color: var(--color-detalles);
+    border: solid white 2px;
+    font-size: 1rem;
+    border-radius: 0.4rem;
+    margin: 4px auto;
+    width: 60%;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #F5BB0F;
+    transform: scale(1.05);
+}
+
+button:active {
+    background-color: #B98A07;    
+    transform: scale(0.97);
+}
+
+.titulo-contenedor{
+    margin-bottom: 1.5rem;
+    border-bottom: 3px var(--color-detalles) solid;
+}

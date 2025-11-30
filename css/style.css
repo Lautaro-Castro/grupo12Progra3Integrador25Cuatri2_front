@@ -156,6 +156,7 @@ hr {
 .card-funcion p {
     margin: 4px;
 }
+
 button {
     background-color: var(--color-detalles);
     border: solid white 2px;
