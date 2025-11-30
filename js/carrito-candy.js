@@ -91,15 +91,32 @@ function renderizarCarrito(){
         });
     });
     actualizarBotonFinalizarCompra();
+    actualizarVisibilidadCarrito();
 }
 
 function actualizarBotonFinalizarCompra(){
+    if (!botonFinalizarCompra) return;  
+    
     if(carrito.length === 0){
         botonFinalizarCompra.disabled = true;
     }
     else
     {
       botonFinalizarCompra.disabled = false;  
+    }
+}
+
+function actualizarVisibilidadCarrito() {
+    const carritoBox = document.getElementById("carrito-box");
+
+    // Si la pagina no tiene carrito-box, no hacemos nada
+    if (!carritoBox) return;
+
+    // Ocultar / mostrar segun si hay productos
+    if (carrito.length === 0) {
+        carritoBox.style.display = "none";
+    } else {
+        carritoBox.style.display = "block";
     }
 }
 

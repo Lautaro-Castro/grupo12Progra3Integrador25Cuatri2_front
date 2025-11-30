@@ -24,6 +24,31 @@
 
     <div id="poster-pelicula"></div>
     <div id="contenedor-funciones"></div>
+
+    <aside id="carrito-box">
+        <h2> 🛒 Carrito</h2>
+        <div id="carrito-items">
+            <p>El carrito está vacío</p>
+        </div>
+        <p id="carrito-total"><strong>Total: $0 </strong></p>
+        <button id="btn-vaciar-carrito" class="btn-vaciar-carrito">Vaciar carrito</button>
+        <button id="btn-finalizar-compra" class="btn-finalizar-compra">Finalizar compra</button>
+    </aside>
+
+    <!-- MODAL para confirmar agregar al carrito -->
+    <div id="modal-carrito" class="modal-oculto">
+        <div class="modal-contenido">
+            <h2>🎟️ Entradas agregadas al carrito</h2>
+            <p>¿Qué querés hacer ahora?</p>
+
+            <div class="modal-botones">
+                <button id="btn-seguir-comprando" >Seguir comprando funciones</button>
+                <button id="btn-ir-carrito" >Ir al carrito</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/carrito-candy.js"></script>
+    <script src="js/carrito-peliculas.js"></script>    
     <script src="js/comprar_entrada.js"></script>
 
 </body>

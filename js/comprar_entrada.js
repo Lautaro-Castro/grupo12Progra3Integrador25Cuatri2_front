@@ -3,6 +3,9 @@ const pelicula_id = params.get("pelicula_id");
 console.log(`${pelicula_id}`);
 const preventa = params.get("preventa");
 
+// Para usar la pelicula en otras funciones
+let peliculaSeleccionada = null;
+
 //Se crea la url para consumir la api
 let url = "http://localhost:3000";
 
@@ -23,6 +26,7 @@ async function obtenerPeliculaPorId(pelicula_id) {
 
         let pelicula = data.payload;
         console.log(pelicula);
+        peliculaSeleccionada = pelicula;
 
         mostrarDatosPelicula(pelicula);
     
@@ -223,6 +227,7 @@ function cargarFunciones(array){
     }
 
     contenedorFunciones.innerHTML = htmlFunciones;
+    activarBotonesAgregar(array);
 }
 
 function formatearFechaYHora(fecha, hora){
@@ -247,6 +252,57 @@ botonLimpiarFiltros.addEventListener("click", (e) => {
     selectorIdiomas.value = "";
     obtenerFunciones();
 });
+
+function activarBotonesAgregar(funciones){
+    funciones.forEach(funcion => {
+        const boton = document.getElementById(`agregar-funcion-${funcion.id}`);
+        if (!boton) return;
+
+        boton.addEventListener("click", () => {
+
+            const inputCantidad = document.getElementById(`cantidad-funcion-${funcion.id}`);
+            const cantidad = Number(inputCantidad.value);
+
+            if (cantidad <= 0) {
+                alert("Debe seleccionar al menos 1 entrada");
+                return;
+            }
+
+            if (!peliculaSeleccionada) {
+                alert("Error cargando la película");
+                return;
+            }
+
+            const fechaYHora = formatearFechaYHora(funcion.fecha, funcion.hora);
+
+            // Lo que va al carrito
+            const producto = {
+                id: funcion.id, 
+                nombre: `${peliculaSeleccionada.nombre} (${funcion.formato} - ${funcion.idioma}) ${fechaYHora.fecha} ${fechaYHora.hora}`,
+                precio: funcion.precio
+            };
+
+            agregarPeliculaAlCarrito(producto, cantidad);
+
+            // Mostrar modal
+            const modal = document.getElementById("modal-carrito");
+            modal.classList.remove("modal-oculto");
+            modal.classList.add("modal-visible");
+
+            // Botón: seguir comprando
+            document.getElementById("btn-seguir-comprando").onclick = () => {
+                modal.classList.remove("modal-visible");
+                modal.classList.add("modal-oculto");
+            };
+
+            // Botón: ir al carrito
+            document.getElementById("btn-ir-carrito").onclick = () => {
+                window.location.href = "candy.html";
+            };
+        });
+    });
+}
+
 
 obtenerPeliculaPorId(pelicula_id);
 obtenerFormatos();
