@@ -37,7 +37,6 @@ function mostrarPeliculasCartelera(array){
             <img class="pelicula-img" src="${peli.poster_url}" alt="${peli.nombre}">
             <h2>${peli.nombre}</h2>
             <P id="id-pelicula"><strong>Id:</strong> ${peli.id}</P>
-            <P>En cartelera</P>
             <button id="btn-editar">Editar</button>
             <button id="btn-eliminar">Eliminar</button>
         </div>`;
@@ -79,7 +78,6 @@ function mostrarPeliculasAEstrenar(array){
                 <img class="pelicula-img" src="${peli.poster_url}" alt="${peli.nombre}">
                 <h2>${peli.nombre}</h2>
                 <P id="id-pelicula"><strong>Id:</strong> ${peli.id}</P>
-                <P>En pre venta</P>
                 <button id="btn-editar">Editar</button>
                 <button id="btn-agregar-a-cartelerea">Agregar a cartelera</button>
                 <button id="btn-eliminar">Eliminar</button>
