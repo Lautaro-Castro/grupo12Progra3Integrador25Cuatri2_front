@@ -490,6 +490,71 @@ button:active {
     width: 350px;
 }
 
+/* ============
+       LOGIN
+================
+*/
+.pagina-login{
+    margin: 0;
+    color: var(--color-secundario);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+/* imagen de fondo */
+    background-image: url("../img/Fondo.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+
+}
+
+.login-header{
+    margin-top: -315px;
+    text-align: center;
+}
+
+/* Títulos login */
+.pagina-login .login-header h1 {
+    font-size: 2.4rem;
+    margin: 0 0 0.5rem 0;
+    color: var(--color-detalles);
+}
+
+.login-header p {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.2rem;
+    color: var(--color-secundario);
+}
+
+/* Label + input + botón */
+.pagina-login .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: center;
+}
+
+#labelIngreseNombre {
+    font-size: 1.2rem;
+}
+
+#campoNombre {
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 260px;
+}
+
+#botonIngresar:hover {
+    background-color: var(--color-detalles-hover);
+    transform: scale(1.03);
+}
+
 
 /* =========================
    RESPONSIVE: PANTALLAS CHICAS

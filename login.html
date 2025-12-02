@@ -4,11 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <input type="text" placeholder="Ingrese su nombre" id="campoNombre">
-    <button id="botonIngresar">Ingresar</button>
+<body class="pagina-login">
+    <main class="login-box">
+        <header class="login-header">
+            <h1>Bienvenido a Peli2Ya</h1>
+            <p>Ingresa tu nombre para comenzar</p>
+        </header>
 
+        <section class="login-form">
+            <label for="campoNombre" id="labelIngreseNombre">Nombre: </label>
+            <input type="text" placeholder="Ingrese su nombre" id="campoNombre">
+            <button id="botonIngresar">Ingresar</button>
+        </section>
+    </main>
+    
     <script>
 
         let botonIngresar = document.getElementById("botonIngresar");
@@ -22,6 +33,13 @@
                 localStorage.setItem("nombreUsuario", campoNombre.value.trim());
                 //Redirigimos a la pagina de peliculas
                 window.location.href = "peliculas.html";
+            }
+        });
+
+        // Enter también dispara ingresar
+        campoNombre.addEventListener("keyup", (e) => {
+            if (e.key === "Enter") {
+                botonIngresar.click();
             }
         });
 
