@@ -84,7 +84,7 @@ function mostrarPeliculasAEstrenar(array){
             </div>`;
     });
     
-    htmlAEstrenar.innerHTML += `</section>`;
+    htmlAEstrenar += `</section>`;
     contenedorPeliculas.innerHTML = htmlAEstrenar;
 }
 

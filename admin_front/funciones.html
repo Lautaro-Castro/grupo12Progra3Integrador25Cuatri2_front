@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peli2Ya Admin - Funciones</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Películas</a></li>
+                <li><a href="funciones.html" class="activo">Funciones</a></li>
+                <li><a href="candy.html">Candy</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- Filtros -->
+         <section id="filtros-funciones">
+            <label for="filtro-pelicula">Película:</label>
+            <input id="filtro-pelicula" type="text" placeholder="Nombre o Id de película">
+
+            <label for="filtro-fecha">Fecha:</label>
+            <input id="filtro-fecha" type="date">
+         </section>
+
+        <button id="btn-agregar-funcion">Agregar función</button>
+        <!-- LISTA DE FUNCIONES -->
+        <section id="contenedor-funciones-admin"></section>
+
+        <!-- FORM / MODAL PARA ALTA / EDICIÓN -->
+        <div id="modal-funcion" >
+            <div class="modal-contenido-funcion">
+                <h2 id="titulo-form-funcion">Agregar función</h2>
+
+                <form id="form-funcion">
+
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+
+                    <label for="sinopsis">Sinopsis:</label>
+                    <textarea id="sinopsis" name="sinopsis" rows="4" required></textarea>
+
+                    <label for="duracion">Duración (minutos):</label>
+                    <input type="number" id="duracion" name="duracion" min="1" required>
+
+                    <label for="clasificacion">Clasificación:</label>
+                    <input type="text" id="clasificacion" name="clasificacion" required>
+
+                    <label for="fecha_estreno">Fecha de estreno:</label>
+                    <input type="date" id="fecha_estreno" name="fecha_estreno" required>
+
+                    <label for="fecha_fin_cartelera">Fecha fin de cartelera:</label>
+                    <input type="date" id="fecha_fin_cartelera" name="fecha_fin_cartelera" required>
+
+                    <label for="poster_url">URL del póster:</label>
+                    <input type="url" id="poster_url" name="poster_url" required>
+
+                    <label for="distribuidor">Distribuidor:</label>
+                    <input type="text" id="distribuidor" name="distribuidor" required>
+          
+                    <label for="director">Director:</label>
+                    <input type="text" id="director" name="director" required>
+
+                    <label for="actores">Actores:</label>
+                    <textarea id="actores" name="actores" rows="3" required></textarea>
+
+                    <div class="modal-botones">
+                        <button type="submit" id="btn-guardar-funcion">Guardar</button>
+                        <button type="button" id="btn-cancelar-funcion">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script src="js/funciones-admin.js"></script>
+    </main>
+</body>
+</html>

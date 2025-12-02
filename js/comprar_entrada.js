@@ -175,7 +175,7 @@ const botonLimpiarFiltros = document.getElementById("btn-limpiar-filtros");
 async function obtenerFunciones(formato_id = null, idioma_id = null) {
     try {
 
-        let urlFetch = `${url}/api/funciones?pelicula_id=${pelicula_id}&preventa=${preventa}`;
+        let urlFetch = `${url}/api/peliculas/${pelicula_id}/funciones?preventa=${preventa}`;
         if(formato_id) urlFetch += `&formato_id=${formato_id}`;
         if(idioma_id) urlFetch += `&idioma_id=${idioma_id}`;
 
