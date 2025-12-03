@@ -78,8 +78,8 @@ function mostrarFunciones(lista) {
     document.querySelectorAll(".btn-editar-funcion").forEach(btn => {
         btn.addEventListener("click", () => {
             const id = Number(btn.dataset.id);
-            const func = funciones.find(f => f.id === id);
-            //TODO consumo api editar
+            // Redirigimos
+            window.location.href = `/editar-funcion.html?id=${id}`;
         });
     });
 
@@ -120,10 +120,7 @@ filtroFecha.addEventListener("change", aplicarFiltros);
 
 //TODO boton agregar funcion
 
-btnCancelarFuncion.addEventListener("click", () => {
-    modalFuncion.style.display = "none";
-    funcionEditando = null;
-});
+
 
 /* ======================
    GUARDAR (POST / PUT)
@@ -181,18 +178,23 @@ async function eliminarFuncion(id) {
     if (!confirm("¿Seguro que querés eliminar esta función?")) return;
 
     try {
-        const response = await fetch(`${url}/api/funciones/${id}`, {
+        let response = await fetch(`${url}/api/funciones/${id}`, {
             method: "DELETE"
         });
 
-        if (!response.ok) {
-            alert("Error eliminando la función");
-            return;
+        let result = await response.json();
+
+        if (response.ok) {
+            alert(result.message);
+            obtenerFunciones();
+        }else{
+            console.error("Error: ", result.message);
+            alert("No se pudo eliminar la funcion");
         }
 
-        await obtenerFunciones();
     } catch (error) {
-        alert("Ocurrió un error");
+        console.error("Error en la solicitud DELETE: ", error);
+        alert("Ocurrio un error al eliminar una funcion");
     }
 }
 

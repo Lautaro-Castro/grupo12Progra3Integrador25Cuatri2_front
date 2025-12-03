@@ -3,7 +3,7 @@ let botonCartelera = document.getElementById("btn-cartelera");
 let botonPreVenta = document.getElementById("btn-preventa");
 let filtroNombreOId = document.getElementById("filtro-nombre-id");
 let filtroId = document.getElementById("filtro-id");
-let botonAgregarPelicula = document.getElementById("agregar-pelicula")
+let botonAgregarPelicula = document.getElementById("agregar-pelicula");
 let url = "http://localhost:3000";
 let esPreventa = false;
 
@@ -41,8 +41,8 @@ function mostrarPeliculas(array, esPreventa){
             <img class="pelicula-img" src="${peli.poster_url}" alt="${peli.nombre}">
             <h2>${peli.nombre}</h2>
             <P id="id-pelicula"><strong>Id:</strong> ${peli.id}</P>
-            <button id="btn-editar">Editar</button>
-            <button id="btn-eliminar">Eliminar</button>
+            <button class="btn-editar-pelicula" data-id="${peli.id}">Editar</button>
+            <button class="btn-eliminar-pelicula" data-id="${peli.id}">Eliminar</button>
         </div>`;
     });
     
@@ -56,7 +56,24 @@ async function cargarPeliculas(esPreventa){
     if(validarListaPeliculas(peliculas)){
         mostrarPeliculas(peliculas, esPreventa);
     }
-        
+    //Escuchamos los botones editar por si los clickean
+    document.querySelectorAll('.btn-editar-pelicula').forEach(boton => {
+        boton.addEventListener('click', () => {
+            // Obtenemos el id del atributo data-id
+            const id = Number(boton.dataset.id);
+            // Redirigimos
+            window.location.href = `/editar-pelicula.html?id=${id}`;
+        });
+    });
+
+    //Escuchamos los botones eliminar por si los clickean
+    document.querySelectorAll('.btn-eliminar-pelicula').forEach(boton => {
+        boton.addEventListener('click', () => {
+            // Obtenemos el id del atributo data-id
+            const id = Number(boton.dataset.id); 
+            eliminarPelicula(id);
+        });
+    });
 }
 
 //Validamos si la lista esta vacia o tiene peliculas. Si esta vacia lo informamos en pantalla. Se retorna true o false segun lo que corresponda a la validacion.
@@ -92,11 +109,33 @@ botonPreVenta.addEventListener("click", () => {
     cargarPeliculas(esPreventa);
 });
 
-
-
 botonAgregarPelicula.addEventListener("click", () => {
     window.location.href = "crear-pelicula.html"
 })
 
+async function eliminarPelicula(id) {
+    if (!confirm("¿Seguro que querés eliminar esta pelicula?")) return;
+
+    try {
+
+        let response = await fetch(`${url}/api/peliculas/${id}`, {
+            method: "DELETE"
+        });
+
+        let result = await response.json();
+
+        if(response.ok) {
+            alert(result.message);
+            cargarPeliculas(esPreventa);
+        } else {
+            console.error("Error: ", result.message);
+            alert("No se pudo eliminar la pelicula");
+        }
+
+    } catch (error) { // El catch este, solo atrapa errores de red
+        console.error("Error en la solicitud DELETE: ", error);
+        alert("Ocurrio un error al eliminar una pelicula");
+    }
+}
 
 cargarPeliculas(esPreventa);
