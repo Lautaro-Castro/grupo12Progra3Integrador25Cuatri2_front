@@ -18,7 +18,7 @@
             <input type="number" name="duracion" id="duracion-peli" required>
     
             <label for="clasificacion-peli">Clasificacion</label>
-            <input type="number" name="clasificacion" id="clasificacion-peli" required>
+            <input type="text" name="clasificacion" id="clasificacion-peli" required>
     
             <label for="fecha-estreno-peli">Fecha de estreno</label>
             <input type="date" name="fecha_estreno" id="fecha-estreno-peli" required>
@@ -39,9 +39,13 @@
             <input type="text" name="actores" id="actores-peli" >
 
             <label for="activa-peli">Activa</label>
-            <input type="number" name="activa" id="activa-peli" required>
+            <select type="number" name="activa" id="activa-peli" required>
+                <option value="1">Si</option>
+                <option value="0">No</option>
+            </select>
             
             <input type="submit" value="Crear pelicula">
+            
         </form>
         
 
