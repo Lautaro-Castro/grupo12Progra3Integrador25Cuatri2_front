@@ -36,7 +36,7 @@ async function crearFormulario(pelicula) {
     const fechaFinCartelera = pelicula.fecha_fin_cartelera ? pelicula.fecha_fin_cartelera.split('T')[0] : '';
 
     let updateFormHTML = `
-    <form id="alta-peliculas-container" class="form-alta">
+    <form id="editar-pelicula-container" class="form-alta">
 
             <input type="hidden" name="id" id="idPeli" value="${pelicula.id}">
 
