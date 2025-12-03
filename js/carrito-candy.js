@@ -19,7 +19,7 @@ function agregarAlCarrito(producto, cantidad) {
         alert("Debe seleccionar una cantidad mayor a 0");
         return;
     }
-    let existente = carrito.find(item => item.id === producto.id);
+    let existente = carrito.find(item => item.nombre === producto.nombre);
 
     if(existente){
         existente.cantidad + cantidad > 3 ? alert("No se pudo agregar al carrito! La cantidad maxima por producto es 3.") : existente.cantidad +=cantidad;
@@ -128,3 +128,15 @@ const btnVaciar = document.getElementById("btn-vaciar-carrito");
 if (btnVaciar) {
     btnVaciar.addEventListener("click", vaciarCarrito);
 }
+
+botonFinalizarCompra.addEventListener("click", () => {
+    if(window.location.pathname.includes('comprar-entrada')){
+
+        let response = fetch(`${url}/api/funciones`)
+        window.location.href = "candy.html";
+    }else{
+        alert("¡Compra finalizada exitosamente!");
+        window.location.href = "standby.html";
+    }
+})
+

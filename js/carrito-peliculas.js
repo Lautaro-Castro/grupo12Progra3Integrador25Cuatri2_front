@@ -12,8 +12,8 @@ function agregarPeliculaAlCarrito(pelicula, cantidad) {
     let existente = carrito.find(item => item.id === pelicula.id);
 
     if (existente) {
-        if (existente.cantidad + cantidad > 3) {
-            alert("No se pudo agregar al carrito! La cantidad maxima por pelicula es 3.");
+        if (existente.cantidad + cantidad > pelicula.butacas_disponibles) {
+            alert("No se pudo agregar al carrito! No hay mas butacas disponibles");
             return;
         }
         existente.cantidad += cantidad;
@@ -39,5 +39,4 @@ function agregarPeliculaAlCarrito(pelicula, cantidad) {
         if (carritoBox && carrito.length > 0) {
             carritoBox.style.display = "block";
     }
-
 }

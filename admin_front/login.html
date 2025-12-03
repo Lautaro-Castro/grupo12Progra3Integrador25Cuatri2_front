@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="pagina-login">
+    <main class="login-box">
+        <header class="login-header">
+            <h1>Bienvenido a Peli2Ya</h1>
+            <p>Ingresa tu nombre para comenzar</p>
+        </header>
+
+        <form action="/login" method="POST" autocomplete="off" id="login-form">
+    
+            <label for="emailUser">Email</label>
+            <input type="email" name="email" id="emailUser" required>
+            
+            <label for="passwordUser">Password</label>
+            <input type="password" name="password" id="passwordUser" required>
+            
+            <div class="login-botonera">
+                <input type="submit" value="Login">
+                <input type="button" id="acceso-rapido" value="Acceso rapido">
+            </div>
+        </form>
+
+    </main>
+    
+    <script>
+
+        let botonIngresar = document.getElementById("botonIngresar");
+        let campoNombre = document.getElementById("campoNombre");
+
+        botonIngresar.addEventListener("click", () => {
+            if(!campoNombre.value){
+                alert("Ingrese su nombre por favor!");
+            }else{
+                // Guardamos el nombre en localStorage
+                localStorage.setItem("nombreUsuario", campoNombre.value.trim());
+                //Redirigimos a la pagina de peliculas
+                window.location.href = "peliculas.html";
+            }
+        });
+
+        // Enter también dispara ingresar
+        campoNombre.addEventListener("keyup", (e) => {
+            if (e.key === "Enter") {
+                botonIngresar.click();
+            }
+        });
+
+    </script>
+</body>
+</html>
