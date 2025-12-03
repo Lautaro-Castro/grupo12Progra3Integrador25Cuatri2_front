@@ -8,7 +8,7 @@ let esCombo = false;
 
 async function obtenerCandy(esCombo) {
     try{
-        let request = esCombo ? `${url}/api/candy/combos` : `${url}/api/candy/productos`;
+        let request = esCombo ? `${url}/api/candy?tipo=combo` : `${url}/api/candy?tipo=producto`;
         let response = await fetch(request);
         let data = await response.json();
         let candy = data.payload

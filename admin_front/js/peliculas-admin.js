@@ -3,6 +3,7 @@ let botonCartelera = document.getElementById("btn-cartelera");
 let botonPreVenta = document.getElementById("btn-preventa");
 let filtroNombreOId = document.getElementById("filtro-nombre-id");
 let filtroId = document.getElementById("filtro-id");
+let botonAgregarPelicula = document.getElementById("agregar-pelicula")
 let url = "http://localhost:3000";
 let esPreventa = false;
 
@@ -90,5 +91,12 @@ botonPreVenta.addEventListener("click", () => {
     esPreventa = true;
     cargarPeliculas(esPreventa);
 });
+
+
+
+botonAgregarPelicula.addEventListener("click", () => {
+    window.location.href = "crear-pelicula.html"
+})
+
 
 cargarPeliculas(esPreventa);

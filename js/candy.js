@@ -9,7 +9,7 @@ let url = "http://localhost:3000";
 //Funcion para poder consumir la api y traer los productos
 async function obtenerProductos() {
     try {
-        let response = await fetch(`${url}/api/candy/productos`);
+        let response = await fetch(`${url}/api/candy?tipo=producto`);
         console.log(response);
         console.log(`Solicitud fetch `)
     
@@ -70,7 +70,7 @@ function mostrarProductos(array){
 
 async function obtenerCombos() {
     try {
-        let response = await fetch(`${url}/api/candy/combos`);
+        let response = await fetch(`${url}/api/candy?tipo=combo`);
         console.log(response);
         console.log(`Solicitud fetch `)
     
