@@ -169,7 +169,7 @@ const botonLimpiarFiltros = document.getElementById("btn-limpiar-filtros");
 async function obtenerFunciones(formato_id = null, idioma_id = null) {
     try {
 
-        let urlFetch = `${url}/api/peliculas/${pelicula_id}/funciones`;
+        let urlFetch = `${url}/api/peliculas/${pelicula_id}/funciones?`;
         if(formato_id) urlFetch += `&formato_id=${formato_id}`;
         if(idioma_id) urlFetch += `&idioma_id=${idioma_id}`;
 
@@ -273,26 +273,11 @@ function activarBotonesAgregar(funciones){
             const producto = {
                 id: funcion.id, 
                 nombre: `${peliculaSeleccionada.nombre} (${funcion.formato} - ${funcion.idioma}) ${fechaYHora.fecha} ${fechaYHora.hora}`,
-                precio: funcion.precio
+                precio: funcion.precio,
+                butacas_disponibles: funcion.butacas_disponibles
             };
-
             agregarPeliculaAlCarrito(producto, cantidad);
 
-            // Mostrar modal
-            const modal = document.getElementById("modal-carrito");
-            modal.classList.remove("modal-oculto");
-            modal.classList.add("modal-visible");
-
-            // Botón: seguir comprando
-            document.getElementById("btn-seguir-comprando").onclick = () => {
-                modal.classList.remove("modal-visible");
-                modal.classList.add("modal-oculto");
-            };
-
-            // Botón: ir al carrito
-            document.getElementById("btn-ir-carrito").onclick = () => {
-                window.location.href = "candy.html";
-            };
         });
     });
 }
