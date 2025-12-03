@@ -253,7 +253,6 @@ function activarBotonesAgregar(funciones){
         if (!boton) return;
 
         boton.addEventListener("click", () => {
-
             const inputCantidad = document.getElementById(`cantidad-funcion-${funcion.id}`);
             const cantidad = Number(inputCantidad.value);
 
@@ -270,13 +269,13 @@ function activarBotonesAgregar(funciones){
             const fechaYHora = formatearFechaYHora(funcion.fecha, funcion.hora);
 
             // Lo que va al carrito
-            const producto = {
-                id: funcion.id, 
+            const pelicula = {
+                funcion_id: funcion.id, 
                 nombre: `${peliculaSeleccionada.nombre} (${funcion.formato} - ${funcion.idioma}) ${fechaYHora.fecha} ${fechaYHora.hora}`,
                 precio: funcion.precio,
                 butacas_disponibles: funcion.butacas_disponibles
             };
-            agregarPeliculaAlCarrito(producto, cantidad);
+            agregarPeliculaAlCarrito(pelicula, cantidad);
 
         });
     });

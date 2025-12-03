@@ -4,6 +4,12 @@ function guardarCarrito() {
 
 // pelicula debe tener: id, nombre, precio
 function agregarPeliculaAlCarrito(pelicula, cantidad) {
+
+    //Valdiamos que se agregue una funcion nueva o la misma que ya esta en el carrito
+    if(!validarMismaFuncion(pelicula)){
+        return;
+    }
+
     if (cantidad <= 0) {
         alert("Debe seleccionar al menos 1 entrada");
         return;
@@ -13,7 +19,7 @@ function agregarPeliculaAlCarrito(pelicula, cantidad) {
 
     if (existente) {
         if (existente.cantidad + cantidad > pelicula.butacas_disponibles) {
-            alert("No se pudo agregar al carrito! No hay mas butacas disponibles");
+            alert("No se pudo agregar al carrito! No hay butacas disponibles para la cantidad solicitada.");
             return;
         }
         existente.cantidad += cantidad;
@@ -38,5 +44,24 @@ function agregarPeliculaAlCarrito(pelicula, cantidad) {
     const carritoBox = document.getElementById("carrito-box");
         if (carritoBox && carrito.length > 0) {
             carritoBox.style.display = "block";
+    }
+}
+
+
+function validarMismaFuncion(pelicula){
+
+    //Revisamos si ya hay una entrada agregada al carrito (validamos por funcion_id !== undefined para filtrar los candy)
+    const entradaExistente = carrito.find(item => item.funcion_id !== undefined); 
+
+    //Si no hay entradaExistente retornamos true porque es seguro agregar la entrada
+    if (!entradaExistente) {
+        return true; 
+    }
+
+    if (entradaExistente.funcion_id !== pelicula.funcion_id) {
+        alert("⚠️ ¡Atencion! Ya estas comprando entradas para otra funcion.\nFinaliza la compra actual para adquirir entradas para otras funciones.");
+        return false;
+    }else{
+        return true;
     }
 }

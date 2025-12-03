@@ -41,9 +41,9 @@ function vaciarCarrito() {
     renderizarCarrito();
 }
 
-// Elimina un solo producto por id
-function eliminarDelCarrito(id) {
-    carrito = carrito.filter(item => item.id !== id);
+// Elimina un solo producto por nombre
+function eliminarDelCarrito(nombre) {
+    carrito = carrito.filter(item => item.nombre !== nombre);
     guardarCarrito();
     renderizarCarrito();
 }
@@ -74,7 +74,7 @@ function renderizarCarrito(){
                     <p>${item.nombre} x ${item.cantidad}</p>
                     <p>$${subtotal}</p>
                 </div>
-                <button class="btn-eliminar-item" data-id="${item.id}" title="Eliminar"> 
+                <button class="btn-eliminar-item" data-id="${item.nombre}" title="Eliminar"> 
                 x
                 </button>
             </div>
@@ -86,8 +86,9 @@ function renderizarCarrito(){
     const botonesEliminar = document.querySelectorAll(".btn-eliminar-item");
     botonesEliminar.forEach(boton => {
         boton.addEventListener("click", () => {
-            const id = Number(boton.dataset.id);
-            eliminarDelCarrito(id);
+            const nombre = boton.dataset.id;
+            console.log(nombre);
+            eliminarDelCarrito(nombre);
         });
     });
     actualizarBotonFinalizarCompra();
@@ -129,14 +130,46 @@ if (btnVaciar) {
     btnVaciar.addEventListener("click", vaciarCarrito);
 }
 
-botonFinalizarCompra.addEventListener("click", () => {
+botonFinalizarCompra.addEventListener("click", async () => {
     if(window.location.pathname.includes('comprar-entrada')){
-
-        let response = fetch(`${url}/api/funciones`)
         window.location.href = "candy.html";
-    }else{
-        alert("¡Compra finalizada exitosamente!");
-        window.location.href = "standby.html";
+    }else {
+        let validacion = await actualizarButacasDisponibles();
+        if(validacion){
+            alert("¡Compra finalizada exitosamente!");
+            window.location.href = "standby.html";
+        }
     }
 })
+
+async function actualizarButacasDisponibles() {
+    try {
+
+        let funcion = carrito.find(item => item.butacas_disponibles !== undefined);
+        if(!funcion){
+            return true;
+        }
+        const nuevasButacasDisponibles = funcion.butacas_disponibles - funcion. cantidad;
+        const funcionId = funcion.funcion_id;
+        const data = {"id": funcionId, "butacas_disponibles": nuevasButacasDisponibles}
+
+        if(funcion){
+            let url = "http://localhost:3000";
+
+            let response = await fetch(`${url}/api/funciones/${funcionId}/butacasDisponibles`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }); 
+        }
+        return true;
+    } catch (error) {
+        console.log(response);
+        alert("⚠️ Error al realizar la compra. Consulte con el staff del cine.");
+        return false;
+    }
+    
+}
 
