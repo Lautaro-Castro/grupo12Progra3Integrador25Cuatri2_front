@@ -32,3 +32,11 @@ altaPeliculas.addEventListener("submit", async(event)=>{
         alert("Error al procesar la solicitud");
     }
 });
+
+let botonCancelarCreacion = document.getElementById("btn-cancelar-creacion-pelicula");
+
+botonCancelarCreacion.addEventListener("click", () => {
+    if(confirm("¿Estas seguro que queres cancelar la creacion?")) {
+        window.location.href = "index.html";
+    }
+})
