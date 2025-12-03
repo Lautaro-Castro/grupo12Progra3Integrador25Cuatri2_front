@@ -120,10 +120,10 @@ filtroFecha.addEventListener("change", aplicarFiltros);
 
 //TODO boton agregar funcion
 
-btnCancelarFuncion.addEventListener("click", () => {
-    modalFuncion.style.display = "none";
-    funcionEditando = null;
-});
+// btnCancelarFuncion.addEventListener("click", () => {
+//     modalFuncion.style.display = "none";
+//     funcionEditando = null;
+// });
 
 /* ======================
    GUARDAR (POST / PUT)
@@ -195,6 +195,11 @@ async function eliminarFuncion(id) {
         alert("Ocurrió un error");
     }
 }
+// boton agregar funcion
+btnAgregarFuncion.addEventListener("click", () => {
+    window.location.href = "crear-funciones.html"
+})
+
 
 /* ======================
    INICIO
