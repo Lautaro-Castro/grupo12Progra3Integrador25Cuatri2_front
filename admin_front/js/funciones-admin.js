@@ -197,6 +197,11 @@ async function eliminarFuncion(id) {
         alert("Ocurrio un error al eliminar una funcion");
     }
 }
+// boton agregar funcion
+btnAgregarFuncion.addEventListener("click", () => {
+    window.location.href = "crear-funciones.html"
+})
+
 
 /* ======================
    INICIO
