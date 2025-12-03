@@ -60,7 +60,7 @@ async function cargarCandy(esCombo) {
             // Obtenemos el id del atributo data-id
             const id = Number(boton.dataset.id); 
             // Redirigimos
-            window.location.href = `/editar-candy.html?id=${id}`;
+            window.location.href = `editar-candy.html?id=${id}`;
         });
     });
 
