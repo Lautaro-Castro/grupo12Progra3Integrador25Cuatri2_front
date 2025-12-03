@@ -79,7 +79,7 @@ function mostrarFunciones(lista) {
         btn.addEventListener("click", () => {
             const id = Number(btn.dataset.id);
             // Redirigimos
-            window.location.href = `/editar-funcion.html?id=${id}`;
+            window.location.href = `editar-funcion.html?id=${id}`;
         });
     });
 
