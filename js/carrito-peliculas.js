@@ -40,5 +40,4 @@ function agregarPeliculaAlCarrito(pelicula, cantidad) {
             carritoBox.style.display = "block";
     }
 
-
 }
