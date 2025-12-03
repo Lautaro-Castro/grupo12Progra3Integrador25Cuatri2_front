@@ -1,7 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 const pelicula_id = params.get("pelicula_id");
-console.log(`${pelicula_id}`);
-const preventa = params.get("preventa");
+const preventa = params.get("esPreventa") === "true";
 
 // Para usar la pelicula en otras funciones
 let peliculaSeleccionada = null;
@@ -18,16 +17,11 @@ let url = "http://localhost:3000";
 async function obtenerPeliculaPorId(pelicula_id) {
     try {
         let response = await fetch(`${url}/api/peliculas/${pelicula_id}`);
-        console.log(response);
-        console.log(`Solicitud fetch pelicula por id`)
     
         let data = await response.json();
-        console.log(data);
 
         let pelicula = data.payload;
-        console.log(pelicula);
         peliculaSeleccionada = pelicula;
-
         mostrarDatosPelicula(pelicula);
     
     } catch (error) {
@@ -49,7 +43,7 @@ async function mostrarDatosPelicula(pelicula) {
     </div>`;
 
     const barraTitulo = document.getElementById("contenedor-titulo");
-    if(preventa === "0"){
+    if(!preventa ){
         barraTitulo.innerHTML += `
         <a href="peliculas.html"> &lt; Volver</a>
         <h1>Comprando entradas para ${pelicula.nombre}</h1>`;
@@ -175,7 +169,7 @@ const botonLimpiarFiltros = document.getElementById("btn-limpiar-filtros");
 async function obtenerFunciones(formato_id = null, idioma_id = null) {
     try {
 
-        let urlFetch = `${url}/api/peliculas/${pelicula_id}/funciones?preventa=${preventa}`;
+        let urlFetch = `${url}/api/peliculas/${pelicula_id}/funciones`;
         if(formato_id) urlFetch += `&formato_id=${formato_id}`;
         if(idioma_id) urlFetch += `&idioma_id=${idioma_id}`;
 

@@ -1,16 +1,15 @@
 let contenedorFunciones = document.getElementById("contenedor-funciones-admin");
 let filtroPelicula = document.getElementById("filtro-pelicula");
 let filtroFecha = document.getElementById("filtro-fecha");
+let botonCartelera = document.getElementById("btn-cartelera");
 let btnAgregarFuncion = document.getElementById("btn-agregar-funcion");
 
 let modalFuncion = document.getElementById("modal-funcion");
 let tituloFormFuncion = document.getElementById("titulo-form-funcion");
 let formFuncion = document.getElementById("form-funcion");
 let btnCancelarFuncion = document.getElementById("btn-cancelar-funcion");
-
 let url = "http://localhost:3000";
 let funciones = [];
-let mostrandoSoloActivas = true;
 let funcionEditando = null; // si es null => alta, si tiene objeto => edición
 
 /* ======================
@@ -21,7 +20,7 @@ async function obtenerFunciones() {
         let response = await fetch(`${url}/api/funciones`);
         let data = await response.json();
         funciones = data.payload;
-        aplicarFiltrosYMostrar();
+        aplicarFiltros();
     } catch (error) {
         console.error("Error obteniendo funciones:", error);
     }
@@ -80,7 +79,7 @@ function mostrarFunciones(lista) {
         btn.addEventListener("click", () => {
             const id = Number(btn.dataset.id);
             const func = funciones.find(f => f.id === id);
-            abrirModalFuncion(func);
+            //TODO consumo api editar
         });
     });
 
@@ -95,13 +94,8 @@ function mostrarFunciones(lista) {
 /* ======================
    FILTROS
 ====================== */
-function aplicarFiltrosYMostrar() {
+function aplicarFiltros() {
     let lista = [...funciones];
-
-    // filtro de activas
-    if (mostrandoSoloActivas) {
-        lista = lista.filter(f => f.activa);
-    }
 
     // filtro por pelicula id o nombre
     const textoPeli = filtroPelicula.value.toLowerCase().trim();
@@ -121,36 +115,10 @@ function aplicarFiltrosYMostrar() {
     mostrarFunciones(lista);
 }
 
-filtroPelicula.addEventListener("keyup", aplicarFiltrosYMostrar);
-filtroFecha.addEventListener("change", aplicarFiltrosYMostrar);
+filtroPelicula.addEventListener("keyup", aplicarFiltros);
+filtroFecha.addEventListener("change", aplicarFiltros);
 
-
-/* ======================
-   MODAL ALTA / EDICIÓN
-====================== */
-function abrirModalFuncion(funcion = null) {
-    funcionEditando = funcion;
-
-    if (funcionEditando) {
-        tituloFormFuncion.textContent = "Editar función";
-
-        document.getElementById("pelicula-id").value = funcionEditando.pelicula_id;
-        document.getElementById("formato-id").value = funcionEditando.formato_id;
-        document.getElementById("idioma-id").value = funcionEditando.idioma_id;
-        document.getElementById("precio").value = funcionEditando.precio;
-        document.getElementById("fecha").value = funcionEditando.fecha?.split("T")[0] || "";
-        document.getElementById("hora").value = funcionEditando.hora?.slice(0,5) || "";
-        document.getElementById("sala").value = funcionEditando.sala;
-        document.getElementById("butacas").value = funcionEditando.butacas_disponibles;
-    } else {
-        tituloFormFuncion.textContent = "Agregar función";
-        formFuncion.reset();
-    }
-
-    modalFuncion.style.display = "flex";
-}
-
-btnAgregarFuncion.addEventListener("click", () => abrirModalFuncion());
+//TODO boton agregar funcion
 
 btnCancelarFuncion.addEventListener("click", () => {
     modalFuncion.style.display = "none";
@@ -224,7 +192,6 @@ async function eliminarFuncion(id) {
 
         await obtenerFunciones();
     } catch (error) {
-        console.error("Error eliminando función:", error);
         alert("Ocurrió un error");
     }
 }

@@ -28,7 +28,7 @@ function mostrarPeliculasAEstrenar(array){
     array.forEach(peli => {
         htmlAEstrenar += `
                 <div class="card-pelicula">
-                    <a class="pelicula-img" href="comprar-entrada.html?pelicula_id=${peli.id}&preventa=1">
+                    <a class="pelicula-img" href="comprar-entrada.html?pelicula_id=${peli.id}&esPreventa=true">
                     <img class="pelicula-img" src="${peli.poster_url}" alt="${peli.nombre}">
                     <h2>${peli.nombre}</h2>
                     </a>
