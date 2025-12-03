@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Pelicula</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!-- Formulario para agregar peliculas -->
@@ -12,7 +13,7 @@
             <input type="text" name="nombre" id="nombre-peli" required>
 
             <label for="sinopsis-peli">Sinopsis</label>
-            <input type="text" name="sinopsis" id="sinopsis-peli" required>
+            <textarea name="sinopsis" id="sinopsis-peli" rows="4" style="width: 100%; padding: 10px; margin-bottom: 20px;" required></textarea>
     
             <label for="duracion-peli">Duracion</label>
             <input type="number" name="duracion" id="duracion-peli" required>
@@ -36,7 +37,7 @@
             <input type="text" name="director" id="director-peli" >
 
             <label for="actores-peli">Actores</label>
-            <input type="text" name="actores" id="actores-peli" >
+            <textarea name="actores" id="actores-peli" rows="3" style="resize: vertical;"></textarea>
 
             <label for="activa-peli">Activa</label>
             <select type="number" name="activa" id="activa-peli" required>
@@ -45,9 +46,8 @@
             </select>
             
             <input type="submit" value="Crear pelicula">
-            
         </form>
-        
+        <button id="btn-cancelar-creacion-pelicula">Cancelar</button>
 
         <script src="./js/crear-pelicula.js"></script>
     

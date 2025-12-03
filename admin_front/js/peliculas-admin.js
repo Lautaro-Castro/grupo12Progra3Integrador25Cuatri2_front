@@ -62,7 +62,7 @@ async function cargarPeliculas(esPreventa){
             // Obtenemos el id del atributo data-id
             const id = Number(boton.dataset.id);
             // Redirigimos
-            window.location.href = `/editar-pelicula.html?id=${id}`;
+            window.location.href = `editar-pelicula.html?id=${id}`;
         });
     });
 
