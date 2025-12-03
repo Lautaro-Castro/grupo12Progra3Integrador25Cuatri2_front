@@ -29,10 +29,10 @@ function mostrarPeliculas(array, esPreventa){
     let htmlPeliculas = ``;
     if(esPreventa){
         htmlPeliculas += `<h1 class="titulo-contenedor">Preventa</h1>
-        <section id="contenedor-peliculas"`;
+        <section id="contenedor-peliculas">`;
     }else{
         htmlPeliculas += `<h1 class="titulo-contenedor">Cartelera</h1>
-        <section id="contenedor-peliculas"`;
+        <section id="contenedor-peliculas">`;
     }
 
     array.forEach(peli => {

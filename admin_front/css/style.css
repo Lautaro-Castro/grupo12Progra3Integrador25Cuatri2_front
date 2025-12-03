@@ -101,12 +101,26 @@ nav a.activo {
     text-align: center;
 }
 
-#contenedor-peliculas, #contenedor-candy {
+ #contenedor-peliculas{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    color: var(--color-secundario); 
+
+}
+
+ #contenedor-candy {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    color: var(--color-secundario);
+    color: var(--color-secundario); 
+
 }
+
+ #contenedor-peliculas{
+    text-align: center;
+ }
 
 .pelicula-img{
     width: 200px;
@@ -143,8 +157,14 @@ button:active {
 }
 
 .titulo-contenedor{
-    margin-bottom: 1.5rem;
-    border-bottom: 3px var(--color-detalles) solid;
+    margin: 2rem auto 1.5rem;
+    font-size: 2.5rem;
+    text-align: center;
+    color: var(--color-secundario);
+
+    display: inline-block;              /* <- clave para que no se estire */
+    border-bottom: 3px solid var(--color-detalles);
+    padding-bottom: .3rem;
 }
 
 
@@ -161,9 +181,7 @@ button:active {
     margin-top: 20px;
     color: var(--color-secundario);
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center
+    flex-direction: column;
 }
 
 
@@ -179,6 +197,18 @@ button:active {
     justify-content: center;
     align-items: center;
     z-index: 5000;
+}
+
+#btn-agregar-funcion, #agregar-pelicula, #btn-agregar-candy{
+    display: flex;
+    justify-content: center;
+}
+
+#contenedor-funciones-lista{ 
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 20px;
 }
 
 .modal-contenido-funcion {
