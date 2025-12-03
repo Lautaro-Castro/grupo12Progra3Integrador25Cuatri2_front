@@ -56,12 +56,11 @@ function mostrarProductos(array){
             const cantidad = Number(inputCantidad.value);
 
             const producto = {
-                id: prod.id,
+                candy_id: prod.id,
                 nombre: prod.nombre,
                 precio: prod.precio,
                 imagen: prod.imagen_url
             };
-
             agregarAlCarrito(producto, cantidad);
         });
     });
