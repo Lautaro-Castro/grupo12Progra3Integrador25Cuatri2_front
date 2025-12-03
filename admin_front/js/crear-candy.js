@@ -1,27 +1,15 @@
 let url = "http://localhost:3000";
-let altaFunciones = document.getElementById("alta-funciones-container");
-
-//Funcion para cargar los idiomas en el filtro
-function cargarFiltroIdiomas(){
-    const selectorIdiomasFunciones = document.getElementById("idioma-id")
-    
-    selectorIdiomasFunciones.innerHTML = `
-        <option value="1">Español</option>
-        <option value="2">Subtitulado</option>
-    `;
-}
-cargarFiltroIdiomas();
-
+let altaCandy = document.getElementById("alta-candy-container");
 
 //Alta de funciones
-altaFunciones.addEventListener("submit", async(event)=>{
+altaCandy.addEventListener("submit", async(event)=>{
     event.preventDefault();
 
     let formData = new FormData(event.target);
     let data = Object.fromEntries(formData.entries());
 
     try{
-        let response = await fetch(`${url}/api/funciones`,{
+        let response = await fetch(`${url}/api/candy`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -41,7 +29,7 @@ altaFunciones.addEventListener("submit", async(event)=>{
     }
 });
 
-let botonCancelarCreacion = document.getElementById("btn-cancelar-creacion-funcion");
+let botonCancelarCreacion = document.getElementById("btn-cancelar-creacion-candy");
 
 botonCancelarCreacion.addEventListener("click", () => {
     if(confirm("¿Estas seguro que queres cancelar la creacion?")) {

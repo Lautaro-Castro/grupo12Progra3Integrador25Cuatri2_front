@@ -137,5 +137,10 @@ async function eliminarCandy(id) {
         alert("Ocurrio un error al eliminar un producto");
     }
 }
+// boton agregar Candy
+btnAgregarCandy.addEventListener("click", () => {
+    window.location.href = "crear-candy.html"
+})
+
 
 cargarCandy(esCombo);
