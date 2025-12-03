@@ -54,7 +54,25 @@ async function cargarCandy(esCombo) {
     if(validarListaCandy(candy)){
         mostrarCandy(candy, esCombo)
     }
+    // ventos editar / eliminar
+    document.querySelectorAll('.btn-editar-candy').forEach(boton => {
+        boton.addEventListener('click', () => {
+            // Obtenemos el id del atributo data-id
+            const id = Number(boton.dataset.id); 
+            // Redirigimos
+            window.location.href = `/editar-candy.html?id=${id}`;
+        });
+    });
+
+    document.querySelectorAll('.btn-eliminar-candy').forEach(boton => {
+        boton.addEventListener('click', () => {
+            // Obtenemos el id del atributo data-id
+            const id = Number(boton.dataset.id); 
+            eliminarCandy(id);
+        });
+    }); 
 }
+
 //Validamos si la lista esta vacia o tiene productos o combos del candy. Si esta vacia lo informamos en pantalla. Se retorna true o false segun lo que corresponda a la validacion.
 function validarListaCandy(listaCandy) {
     if (listaCandy.length === 0) {
@@ -96,4 +114,28 @@ btnAgregarCandy.addEventListener("click", () => {
 /*
     INICIO
 */
+async function eliminarCandy(id) {
+    if (!confirm("¿Seguro que querés eliminar este producto?")) return;
+
+    try {
+        let response = await fetch(`${url}/api/candy/${id}`, {
+            method: "DELETE"
+        });
+
+        let result = await response.json();
+
+        if(response.ok) {
+            alert(result.message);
+            cargarCandy(esCombo);
+        } else {
+            console.error("Error: ", result.message);
+            alert("No se pudo eliminar el producto");
+        }
+
+    } catch (error) { // El catch este, solo atrapa errores de red
+        console.error("Error en la solicitud DELETE: ", error);
+        alert("Ocurrio un error al eliminar un producto");
+    }
+}
+
 cargarCandy(esCombo);
