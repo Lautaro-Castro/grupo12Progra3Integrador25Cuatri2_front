@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Pelicula</title>
+</head>
+<body>
+    <!-- Formulario para agregar peliculas -->
+    <form id="alta-peliculas-container" class="form-alta">
+            <label for="nombre-peli">Nombre</label>
+            <input type="text" name="nombre" id="nombre-peli" required>
+
+            <label for="sinopsis-peli">Sinopsis</label>
+            <input type="text" name="sinopsis" id="sinopsis-peli" required>
+    
+            <label for="duracion-peli">Duracion</label>
+            <input type="number" name="duracion" id="duracion-peli" required>
+    
+            <label for="clasificacion-peli">Clasificacion</label>
+            <input type="number" name="clasificacion" id="clasificacion-peli" required>
+    
+            <label for="fecha-estreno-peli">Fecha de estreno</label>
+            <input type="date" name="fecha_estreno" id="fecha-estreno-peli" required>
+
+            <label for="fecha-fin-cartelera-peli">Fecha de fin de cartelera</label>
+            <input type="date" name="fecha_fin_cartelera" id="fecha-fin-cartelera-peli" required>
+
+            <label for="poster-img-peli">Imagen</label>
+            <input type="text" name="poster_url" id="poster-img-peli" required>
+
+            <label for="Distribuidor-peli">Distribuidor</label>
+            <input type="text" name="distribuidor" id="Distribuidor-peli" required >
+
+            <label for="director-peli">Director</label>
+            <input type="text" name="director" id="director-peli" >
+
+            <label for="actores-peli">Actores</label>
+            <input type="text" name="actores" id="actores-peli" >
+
+            <label for="activa-peli">Activa</label>
+            <input type="number" name="activa" id="activa-peli" required>
+            
+            <input type="submit" value="Crear pelicula">
+        </form>
+        
+
+        <script src="./js/crear-pelicula.js"></script>
+    
+</body>
+</html>
