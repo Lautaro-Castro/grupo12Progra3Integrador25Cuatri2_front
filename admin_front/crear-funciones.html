@@ -17,10 +17,16 @@
             <input type="number" name="formato_id" id="formato-id" required>
     
             <label for="idioma-id">Idioma</label>
-            <input type="number" name="idioma_id" id="idioma-id" required>
-    
+            <select type="number" name="idioma_id" id="idioma-id" required> </select>
+
             <label for="sala-func">Sala</label>
-            <input type="number" name="sala" id="sala-func" required>
+            <select type="number" name="sala" id="sala-func" required>
+                <option value="1">Sala 1</option>
+                <option value="2">Sala 2</option>
+                <option value="3">Sala 3</option>
+                <option value="4">Sala 4</option>
+                <option value="5">Sala 5</option>
+            </select>
     
             <label for="fecha-func">Fecha </label>
             <input type="date" name="fecha" id="fecha-func" required>
@@ -32,7 +38,10 @@
             <input type="number" name="butacas_disponibles" id="butacas-func" required>
 
             <label for="activa-peli">Activa</label>
-            <input type="number" name="activa" id="activa-peli" required>
+            <select type="number" name="activa" id="activa-peli" required>
+                <option value="1">Si</option>
+                <option value="0">No</option>
+            </select>
             
             <input type="submit" value="Crear funcion">
         </form>

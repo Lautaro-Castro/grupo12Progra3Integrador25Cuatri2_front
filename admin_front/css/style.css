@@ -162,7 +162,8 @@ button:active {
     color: var(--color-secundario);
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    gap: 20px;
+    justify-content: center
 }
 
 
