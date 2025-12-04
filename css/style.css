@@ -494,7 +494,7 @@ button:active {
        LOGIN
 ================
 */
-.pagina-login{
+.pagina-login, .pagina-standby{
     margin: 0;
     color: var(--color-secundario);
     display: flex;
